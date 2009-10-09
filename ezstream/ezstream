@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# /etc/rc.d/ezstream: start/stop ezstream daemon
+#
+
+case $1 in
+start)
+	ezstream -q -c /etc/ezstream.xml &
+	;;
+stop)
+	kill -KILL `pidof ezstream`
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
+
+# End of file

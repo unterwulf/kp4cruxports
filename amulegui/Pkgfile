@@ -1,0 +1,31 @@
+# Description: ED2K and Kademlia client (GUI client build)
+# URL:         http://www.amule.org
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  wxgtk, crypto++
+
+name=amulegui
+version=2.2.6
+release=1
+source=(http://download.berlios.de/amule/aMule-$version.tar.bz2)
+
+build() {
+    cd aMule-$version
+
+    export CFLAGS="${CFLAGS//-fstack-protector/}"
+    export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
+    ./configure \
+        --prefix=/usr \
+        --mandir=/usr/man \
+        --disable-monolithic \
+        --disable-amulecmd \
+        --enable-amule-gui \
+        --disable-webserver \
+        --disable-ed2k \
+        --disable-debug \
+        --enable-optimize \
+        --disable-nls
+
+    make
+    make install DESTDIR=$PKG
+    rm -rf $PKG/usr/{share/{doc,amule},man,lib,bin/autostart-xas}
+}

@@ -1,0 +1,179 @@
+diff -ruN aMule-2.2.6.orig/configure aMule-2.2.6/configure
+--- aMule-2.2.6.orig/configure	2009-10-07 20:39:50.000000000 +0400
++++ aMule-2.2.6/configure	2009-10-07 20:40:45.000000000 +0400
+@@ -8492,175 +8492,6 @@
+ fi
+ 
+ 
+-# Check for Crypto++
+-
+-
+-# Check whether --with-crypto-prefix or --without-crypto-prefix was given.
+-if test "${with_crypto_prefix+set}" = set; then
+-  withval="$with_crypto_prefix"
+-
+-fi;
+-
+-	echo "$as_me:$LINENO: checking for crypto++ version >= 5.1" >&5
+-echo $ECHO_N "checking for crypto++ version >= 5.1... $ECHO_C" >&6
+-
+-	cryptopp_file_with_version="cryptlib.h"
+-
+-	CRYPTOPP_STYLE="unknown"
+-	CRYPTOPP_LIB_NAME="unknown"
+-	cryptopp_includedir="unknown"
+-	CRYPTOPP_INCLUDE_PREFIX="unknown"
+-	cryptopp_libdir="unknown"
+-
+-	if test -n "$with_crypto_prefix"; then
+-
+-		# Find the Cryptopp header in the user-provided location
+-		if test -f $with_crypto_prefix/$cryptopp_file_with_version; then
+-
+-			CRYPTOPP_STYLE="sources"
+-			CRYPTOPP_LIB_NAME="cryptopp"
+-			cryptopp_includedir=
+-			CRYPTOPP_INCLUDE_PREFIX="$with_crypto_prefix"
+-			cryptopp_libdir=
+-
+-elif test -f $with_crypto_prefix/include/cryptopp/$cryptopp_file_with_version; then
+-
+-			CRYPTOPP_STYLE="installed"
+-			CRYPTOPP_LIB_NAME="cryptopp"
+-			cryptopp_includedir="$with_crypto_prefix/include"
+-			CRYPTOPP_INCLUDE_PREFIX="$CRYPTOPP_LIB_NAME"
+-			cryptopp_libdir="$with_crypto_prefix/lib"
+-
+-elif test -f $with_crypto_prefix/include/crypto++/$cryptopp_file_with_version; then
+-
+-			# Debian uses libcrypto++5.1 - it's not my fault, please soda patch the package
+-			CRYPTOPP_STYLE="gentoo_debian"
+-			CRYPTOPP_LIB_NAME="crypto++"
+-			cryptopp_includedir="$with_crypto_prefix/include"
+-			CRYPTOPP_INCLUDE_PREFIX="$CRYPTOPP_LIB_NAME"
+-			cryptopp_libdir="$with_crypto_prefix/lib"
+-
+-fi
+-
+-
+-else
+-
+-		for CRYPTOPP_PREFIX in /usr /usr/local /opt /opt/local /usr/pkg /mingw ; do
+-			# Find the Cryptopp header in system locations
+-			if test -f $CRYPTOPP_PREFIX/$cryptopp_file_with_version; then
+-
+-				CRYPTOPP_STYLE="sources"
+-				CRYPTOPP_LIB_NAME="cryptopp"
+-				cryptopp_includedir=
+-				CRYPTOPP_INCLUDE_PREFIX="$CRYPTOPP_PREFIX"
+-				cryptopp_libdir=
+-				break
+-
+-elif test -f $CRYPTOPP_PREFIX/include/cryptopp/$cryptopp_file_with_version; then
+-
+-				CRYPTOPP_STYLE="installed"
+-				CRYPTOPP_LIB_NAME="cryptopp"
+-				cryptopp_includedir="$CRYPTOPP_PREFIX/include"
+-				CRYPTOPP_INCLUDE_PREFIX="$CRYPTOPP_LIB_NAME"
+-				cryptopp_libdir="$CRYPTOPP_PREFIX/lib"
+-				break
+-
+-elif test -f $CRYPTOPP_PREFIX/include/crypto++/$cryptopp_file_with_version; then
+-
+-				# Debian uses libcrypto++5.1 - it's not my fault, please soda patch the package
+-				CRYPTOPP_STYLE="gentoo_debian"
+-				CRYPTOPP_LIB_NAME="crypto++"
+-				cryptopp_includedir="$CRYPTOPP_PREFIX/include"
+-				CRYPTOPP_INCLUDE_PREFIX="$CRYPTOPP_LIB_NAME"
+-				cryptopp_libdir="$CRYPTOPP_PREFIX/lib"
+-				break
+-
+-fi
+-
+-		done
+-
+-fi
+-
+-
+-	if test $CRYPTOPP_STYLE = "unknown"; then
+-  result=no; resultstr=""
+-else
+-
+-		# Find out the crypto++ version and check against the minimum required
+-		cryptopp_header_path="${cryptopp_includedir+$cryptopp_includedir/}$CRYPTOPP_INCLUDE_PREFIX/$cryptopp_file_with_version"
+-		CRYPTOPP_VERSION_STRING=`$EGREP "Reference Manual|API Reference" $cryptopp_header_path | sed -e 's/[^0-9]*\([0-9.]*\).*/\1/'`
+-		CRYPTOPP_VERSION_NUMBER=`echo $CRYPTOPP_VERSION_STRING | $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+-		minvers=`echo 5.1 | $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+-
+-		if test -n "$CRYPTOPP_VERSION_NUMBER" && test "$CRYPTOPP_VERSION_NUMBER" -ge $minvers; then
+-
+-			result=yes
+-			resultstr=" (version $CRYPTOPP_VERSION_STRING, $CRYPTOPP_STYLE)"
+-			if test -n "$cryptopp_includedir"; then
+-  CRYPTOPP_CPPFLAGS="-I$cryptopp_includedir"
+-else
+-  CRYPTOPP_CPPFLAGS=
+-fi
+-
+-			if test -n "$cryptopp_libdir"; then
+-
+-				CRYPTOPP_LDFLAGS="-L$cryptopp_libdir"
+-				CRYPTOPP_LIBS="-l$CRYPTOPP_LIB_NAME"
+-
+-else
+-
+-				CRYPTOPP_LDFLAGS=
+-				CRYPTOPP_LIBS="${CRYPTOPP_INCLUDE_PREFIX}/lib${CRYPTOPP_LIB_NAME}.a"
+-
+-fi
+-
+-
+-
+-			cat >>confdefs.h <<_ACEOF
+-#define CRYPTOPP_INCLUDE_PREFIX $CRYPTOPP_INCLUDE_PREFIX
+-_ACEOF
+-
+-
+-else
+-
+-			result=no
+-			resultstr=" (version $CRYPTOPP_VERSION_STRING is not new enough)"
+-
+-fi
+-
+-
+-fi
+-
+-
+-	echo "$as_me:$LINENO: result: $result$resultstr" >&5
+-echo "${ECHO_T}$result$resultstr" >&6
+-
+-	if test ${result:-no} = yes; then
+-
+-	# Check for CryptoPP >= 5.5
+-	if test $CRYPTOPP_VERSION_NUMBER -ge "5005000"; then
+-  CRYPTOPP_CPPFLAGS="$CRYPTOPP_CPPFLAGS -D__WEAK_CRYPTO__"
+-fi
+-
+-
+-else
+-
+-	{ { echo "$as_me:$LINENO: error:
+-	Could not find crypto++ header file \"$cryptopp_file_with_version\".
+-	Please try again with --with-crypto-prefix=/my_crypto_prefix
+-	(replace /my_crypto_prefix with a valid path to your crypto++
+-	installation directory)." >&5
+-echo "$as_me: error:
+-	Could not find crypto++ header file \"$cryptopp_file_with_version\".
+-	Please try again with --with-crypto-prefix=/my_crypto_prefix
+-	(replace /my_crypto_prefix with a valid path to your crypto++
+-	installation directory)." >&2;}
+-   { (exit 1); exit 1; }; }
+-
+-fi
+-
+-
+-
+ 
+ ac_ext=cc
+ ac_cpp='$CXXCPP $CPPFLAGS'

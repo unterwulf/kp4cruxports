@@ -1,0 +1,15 @@
+# Description: id3v1.3 tags packing/unpacking library
+# URL:         http://wiki.sinil.in/en:lib313
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=lib313
+version=0.0.2
+release=1
+source=(http://dl.sf.net/project/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+}

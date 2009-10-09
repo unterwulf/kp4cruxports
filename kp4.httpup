@@ -1,0 +1,8 @@
+#
+# /etc/ports/kp4.httpup: kp4 CRUX port collection
+#
+
+ROOT_DIR=/usr/ports/kp4
+URL=http://crux.kp4.ru/
+
+# End of file

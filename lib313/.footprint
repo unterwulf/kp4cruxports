@@ -1,0 +1,16 @@
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/id313
+drwxr-xr-x	root/root	usr/include/
+-rw-r--r--	root/root	usr/include/lib313.h
+drwxr-xr-x	root/root	usr/lib/
+-rw-r--r--	root/root	usr/lib/lib313.a
+-rwxr-xr-x	root/root	usr/lib/lib313.la
+lrwxrwxrwx	root/root	usr/lib/lib313.so -> lib313.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/lib313.so.1 -> lib313.so.1.0.0
+-rwxr-xr-x	root/root	usr/lib/lib313.so.1.0.0
+drwxr-xr-x	root/root	usr/lib/pkgconfig/
+-rw-r--r--	root/root	usr/lib/pkgconfig/lib313.pc
+drwxr-xr-x	root/root	usr/man/
+drwxr-xr-x	root/root	usr/man/man3/
+-rw-r--r--	root/root	usr/man/man3/lib313.3.gz

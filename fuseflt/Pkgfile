@@ -1,0 +1,16 @@
+# Description: FUSE filesystem with file conversion filters
+# URL:         http://users.softlab.ntua.gr/~thkala/projects/fuseflt/
+# Maintainer:  Vitaly Sinilin, vs at kp4 pub ru
+# Depends on:  fuse libcfg+
+
+name=fuseflt
+version=0.0.9
+release=1
+source=(http://users.softlab.ntua.gr/~thkala/projects/$name/files/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+
+    make
+    make prefix=$PKG/usr install
+}

@@ -1,0 +1,35 @@
+# Description: Subset of wxWidgets comprised by the non-GUI classes
+# URL:         http://www.wxwidgets.org/docs/faqgen.htm#base
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+
+name=wxbase
+version=2.8.9
+release=1
+source=(http://dl.sf.net/wxwindows/wxGTK-$version.tar.bz2)
+
+build() {
+    cd wxGTK-$version
+    ./configure \
+        --prefix=/usr \
+        --disable-gui \
+        --disable-geometry \
+        --disable-sound \
+        --without-sdl \
+        --disable-display \
+        --disable-debugreport \
+        --enable-optimise \
+        --enable-unicode \
+        --disable-debug \
+        --without-libjpeg \
+        --without-libpng \
+        --without-libtif \
+        --without-libxpm \
+        --without-odbc \
+        --without-expat
+
+    make
+    make prefix=$PKG/usr install
+
+    rm -rf $PKG/usr/share/locale
+    ln -sf /usr/lib/wx/config/base-unicode-release-2.8 $PKG/usr/bin/wx-config
+}

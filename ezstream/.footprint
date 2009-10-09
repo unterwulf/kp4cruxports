@@ -1,0 +1,10 @@
+drwxr-xr-x	root/root	etc/
+-rw-r--r--	root/root	etc/ezstream.xml
+drwxr-xr-x	root/root	etc/rc.d/
+-rwxr-xr-x	root/root	etc/rc.d/ezstream
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/ezstream
+drwxr-xr-x	root/root	usr/man/
+drwxr-xr-x	root/root	usr/man/man1/
+-rw-r--r--	root/root	usr/man/man1/ezstream.1.gz

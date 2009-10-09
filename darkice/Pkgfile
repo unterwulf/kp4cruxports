@@ -1,0 +1,24 @@
+# Description: Live audio streamer
+# URL:         http://code.google.com/p/darkice/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  liblame ligogg libvorbis
+
+name=darkice
+version=0.19
+release=1
+source=(http://$name.googlecode.com/files/$name-$version.tar.gz \
+        $name-$version-build.patch)
+
+build() {
+    cd $name-$version
+
+    patch -p 1 -i $SRC/$name-$version-build.patch
+
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --mandir=/usr/man
+
+    make
+    make DESTDIR=$PKG install
+}

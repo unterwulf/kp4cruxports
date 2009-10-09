@@ -1,0 +1,15 @@
+# Description: Monkey's Audio Codec (.APE) non-win32 Port
+# URL:         http://supermmx.org/linux/mac
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+
+name=mac
+version=3.99-u4-b5
+release=1
+source=(http://supermmx.org/resources/linux/${name}/${name}-${version}.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+}

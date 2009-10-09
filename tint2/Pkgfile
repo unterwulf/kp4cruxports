@@ -1,0 +1,23 @@
+# Description: Lightweight panel/taskbar
+# URL:         http://tint2.googlecode.com
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  imlib2
+
+name=tint2
+version=0.7
+release=1
+source=(http://$name.googlecode.com/files/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --mandir=/usr/man
+
+    make
+    make DESTDIR=$PKG install
+
+    rm -rf $PKG/usr/share
+}

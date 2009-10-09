@@ -1,0 +1,17 @@
+# Description: Command line and configuration file parsing library
+# URL:         http://platon.sk/projects/libcfg+/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=libcfg+
+version=0.6.2
+release=1
+source=(http://platon.sk/upload/_projects/00003/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+    rm -r $PKG/usr/share
+}

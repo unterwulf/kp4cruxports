@@ -1,0 +1,34 @@
+# Description: ED2K and Kademlia client (CLI client build)
+# URL:         http://www.amule.org
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  wxbase
+
+name=amulecmd
+version=2.2.6
+release=1
+source=(http://download.berlios.de/amule/aMule-$version.tar.bz2 \
+        aMule-$version-no-crypto.patch)
+
+build() {
+    cd aMule-$version
+
+    patch -p 1 -i $SRC/aMule-$version-no-crypto.patch
+
+    export CFLAGS="${CFLAGS//-fstack-protector/}"
+    export CXXFLAGS="${CXXFLAGS//-fstack-protector/}"
+    ./configure \
+        --prefix=/usr \
+        --mandir=/usr/man \
+        --disable-monolithic \
+        --enable-amulecmd \
+        --disable-amule-gui \
+        --disable-webserver \
+        --disable-ed2k \
+        --disable-debug \
+        --enable-optimize \
+        --disable-nls
+
+    make
+    make install DESTDIR=$PKG
+    rm -rf $PKG/usr/{share,man,lib,bin/autostart-xas}
+}
