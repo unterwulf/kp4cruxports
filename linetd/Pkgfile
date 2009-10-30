@@ -1,0 +1,16 @@
+# Description: small inetd or xinetd replacement
+# URL:         http://welz.org.za/projects/linetd/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=linetd
+version=1.4
+release=1
+source=(http://welz.org.za/projects/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+    make
+    install -D -m 755 $name $PKG/usr/sbin/$name
+    install -D -m 644 $name.8 $PKG/usr/man/man8/$name.8
+}
