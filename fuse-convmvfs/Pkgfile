@@ -1,0 +1,16 @@
+# Description: FUSE filesystem to convert filename charset
+# URL:         http://fuse-convmvfs.sourceforge.net
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  fuse
+
+name=fuse-convmvfs
+version=0.2.4
+release=1
+source=(http://dl.sf.net/project/$name/$name/$version/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr
+    make
+    make DESTDIR=$PKG install
+}
