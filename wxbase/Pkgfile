@@ -1,6 +1,6 @@
 # Description: Subset of wxWidgets comprised by the non-GUI classes
 # URL:         http://www.wxwidgets.org/docs/faqgen.htm#base
-# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 
 name=wxbase
 version=2.8.9

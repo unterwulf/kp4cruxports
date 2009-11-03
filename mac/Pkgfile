@@ -1,6 +1,6 @@
 # Description: Monkey's Audio Codec (.APE) non-win32 Port
 # URL:         http://supermmx.org/linux/mac
-# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 
 name=mac
 version=3.99-u4-b5

@@ -1,6 +1,6 @@
 # Description: ED2K and Kademlia client (GUI client build)
 # URL:         http://www.amule.org
-# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 # Depends on:  wxgtk, crypto++
 
 name=amulegui

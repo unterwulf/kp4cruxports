@@ -1,6 +1,6 @@
 # Description: JACK Audio Connection Kit - Qt GUI Interface
 # URL:         http://qjackctl.sourceforge.net
-# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 # Depends on:  qt4 jack alsa-lib
 
 name=qjackctl
