@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# /etc/rc.d/acpid: start/stop ACPI daemon
+#
+
+case $1 in
+start)
+	if [ -e /proc/acpi ]; then
+        /usr/sbin/acpid -c /etc/acpi/events
+	fi
+    ;;
+stop)
+    killall -q /usr/sbin/acpid
+    ;;
+reload)
+    kill -HUP $(pidof acpid)
+    ;;
+restart)
+    $0 stop
+    sleep 2
+    $0 start
+    ;;
+*)
+    echo "usage: $0 [start|stop|reload|restart]"
+    ;;
+esac
+
+# End of file
