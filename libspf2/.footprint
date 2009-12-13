@@ -1,0 +1,32 @@
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/spf_example
+-rwxr-xr-x	root/root	usr/bin/spf_example_static
+-rwxr-xr-x	root/root	usr/bin/spfd
+-rwxr-xr-x	root/root	usr/bin/spfd_static
+-rwxr-xr-x	root/root	usr/bin/spfquery
+-rwxr-xr-x	root/root	usr/bin/spfquery_static
+-rwxr-xr-x	root/root	usr/bin/spftest
+-rwxr-xr-x	root/root	usr/bin/spftest_static
+drwxr-xr-x	root/root	usr/include/
+drwxr-xr-x	root/root	usr/include/spf2/
+-rw-r--r--	root/root	usr/include/spf2/spf.h
+-rw-r--r--	root/root	usr/include/spf2/spf_dns.h
+-rw-r--r--	root/root	usr/include/spf2/spf_dns_cache.h
+-rw-r--r--	root/root	usr/include/spf2/spf_dns_null.h
+-rw-r--r--	root/root	usr/include/spf2/spf_dns_resolv.h
+-rw-r--r--	root/root	usr/include/spf2/spf_dns_rr.h
+-rw-r--r--	root/root	usr/include/spf2/spf_dns_test.h
+-rw-r--r--	root/root	usr/include/spf2/spf_dns_zone.h
+-rw-r--r--	root/root	usr/include/spf2/spf_lib_version.h
+-rw-r--r--	root/root	usr/include/spf2/spf_log.h
+-rw-r--r--	root/root	usr/include/spf2/spf_record.h
+-rw-r--r--	root/root	usr/include/spf2/spf_request.h
+-rw-r--r--	root/root	usr/include/spf2/spf_response.h
+-rw-r--r--	root/root	usr/include/spf2/spf_server.h
+drwxr-xr-x	root/root	usr/lib/
+-rw-r--r--	root/root	usr/lib/libspf2.a
+-rwxr-xr-x	root/root	usr/lib/libspf2.la
+lrwxrwxrwx	root/root	usr/lib/libspf2.so -> libspf2.so.2.1.0
+lrwxrwxrwx	root/root	usr/lib/libspf2.so.2 -> libspf2.so.2.1.0
+-rwxr-xr-x	root/root	usr/lib/libspf2.so.2.1.0
