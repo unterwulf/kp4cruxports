@@ -4,20 +4,22 @@
 # Depends on:  qt3 lash fluidsynth
 
 name=muse
-version=1.0rc3
+version=1.0
 release=1
-source=(http://dl.sf.net/sourceforge/l${name}/${name}-${version}.tar.gz)
+source=(http://dl.sf.net/sourceforge/l$name/$name-$version.tar.gz \
+        $name-$version-destdir.patch)
 
 build() {
     cd $name-$version
+
+    patch -p1 < $SRC/$name-$version-destdir.patch
     unset CFLAGS
     export QTDIR=/usr/share/qt3
 
     ./configure \
          --prefix=/usr \
          --enable-lash \
-         --enable-optimize \
-         --disable-nls
+         --enable-optimize
 
     make
     make DESTDIR=$PKG install
