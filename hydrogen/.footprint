@@ -52,6 +52,11 @@ drwxr-xr-x	root/root	usr/share/hydrogen/data/img/
 drwxr-xr-x	root/root	usr/share/hydrogen/data/img/gray/
 drwxr-xr-x	root/root	usr/share/hydrogen/data/img/gray/about/
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/about/aboutLogo.png
+drwxr-xr-x	root/root	usr/share/hydrogen/data/img/gray/audiFileBrowser/
+-rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/audiFileBrowser/go-home.png
+-rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/audiFileBrowser/go-up.png
+-rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/audiFileBrowser/player_play.png
+-rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/audiFileBrowser/player_stop.png
 drwxr-xr-x	root/root	usr/share/hydrogen/data/img/gray/drumkitManager/
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/drumkitManager/background_options.png
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/drumkitManager/btn_export_off.png
@@ -256,6 +261,7 @@ drwxr-xr-x	root/root	usr/share/hydrogen/data/img/gray/playerControlPanel/
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/playerControlPanel/midiActivity_back.png
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/playerControlPanel/midiActivity_on.png
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/playerControlPanel/onoff.png
+-rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/playerControlPanel/playlist_background_Control.png
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/playerControlPanel/statusLED_off.png
 -rw-r--r--	root/root	usr/share/hydrogen/data/img/gray/playerControlPanel/statusLED_on.png
 drwxr-xr-x	root/root	usr/share/hydrogen/data/img/gray/preferencesDialog/

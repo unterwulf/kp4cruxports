@@ -1,12 +1,12 @@
 # Description: Advanced drum machine for GNU/Linux
 # URL:         http://www.hydrogen-music.org
 # Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
-# Depends on:  scons qt4 jack flac alsa-lib libsndfile liblrdf
+# Depends on:  scons qt4 jack alsa-lib libsndfile
 
 name=hydrogen
-version=0.9.4-rc1-1
+version=0.9.4
 release=1
-source=(http://dl.sf.net/sourceforge/${name}/${name}-${version}.tar.gz)
+source=(http://dl.sf.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
