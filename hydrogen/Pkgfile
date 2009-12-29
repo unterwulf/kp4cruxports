@@ -5,7 +5,7 @@
 
 name=hydrogen
 version=0.9.4
-release=1
+release=2
 source=(http://dl.sf.net/sourceforge/$name/$name-$version.tar.gz)
 
 build() {
@@ -13,13 +13,7 @@ build() {
 
     export QTDIR=/usr/share/qt4
 
-# Rough lash autodetection workaround. Why can't scons detect lash presence
-# by its own?
-
-    lash=0
-    pkg-config --exists lash-1.0 && lash=1
-
-    scons libarchive=1 prefix=/usr lash=$lash DESTDIR=$PKG install
+    scons libarchive=1 prefix=/usr DESTDIR=$PKG install
 
     rm -rf $PKG/usr/share/hydrogen/data/{demo_songs,doc,i18n}
 }
