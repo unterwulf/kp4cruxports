@@ -1,0 +1,16 @@
+# Description: The simple command line interface to libexif
+# URL:         http://libexif.sourceforge.net
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  libexif popt
+
+name=exif
+version=0.6.19
+release=1
+source=(http://dl.sf.net/project/libexif/$name/$version/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --mandir=/usr/man --disable-nls
+    make
+    make DESTDIR=$PKG install
+}
