@@ -4,15 +4,13 @@
 # Depends on:  qt3 fluidsynth
 
 name=muse
-version=1.0
-release=2
-source=(http://dl.sf.net/sourceforge/l$name/$name-$version.tar.gz \
-        $name-$version-destdir.patch)
+version=1.0.1
+release=1
+source=(http://dl.sf.net/sourceforge/l$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
 
-    patch -p1 < $SRC/$name-$version-destdir.patch
     unset CFLAGS
     export QTDIR=/usr/share/qt3
 
