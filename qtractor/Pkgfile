@@ -4,7 +4,7 @@
 # Depends on:  qt4 alsa-lib jack libsndfile ladspa
 
 name=qtractor
-version=0.4.3
+version=0.4.4
 release=1
 source=(http://dl.sf.net/project/$name/$name/$version/$name-$version.tar.gz)
 
