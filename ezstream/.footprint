@@ -1,5 +1,5 @@
 drwxr-xr-x	root/root	etc/
--rw-r--r--	root/root	etc/ezstream.xml
+-rw-r-----	root/root	etc/ezstream.conf
 drwxr-xr-x	root/root	etc/rc.d/
 -rwxr-xr-x	root/root	etc/rc.d/ezstream
 drwxr-xr-x	root/root	usr/

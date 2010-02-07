@@ -4,7 +4,7 @@
 # Depends on:  libxml2 libshout
 
 name=ezstream
-version=0.5.4
+version=0.5.6
 release=1
 source=(http://downloads.us.xiph.org/releases/$name/$name-$version.tar.gz \
         ezstream)
@@ -21,8 +21,9 @@ build() {
 
     install -d $PKG/etc/rc.d
     install -m 755 $SRC/ezstream $PKG/etc/rc.d/ezstream
-    install -m 644 $PKG/usr/share/examples/ezstream/ezstream_reencode_vorbis.xml \
-                   $PKG/etc/ezstream.xml
-
+    install -m 640 $PKG/usr/share/examples/ezstream/ezstream_reencode_vorbis.xml \
+                   $PKG/etc/ezstream.conf
+    rm $PKG/usr/bin/ezstream-file.sh
+    rm $PKG/usr/man/man1/ezstream-file.sh.1
     rm -r $PKG/usr/share
 }

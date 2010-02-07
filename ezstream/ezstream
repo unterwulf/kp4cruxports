@@ -5,10 +5,10 @@
 
 case $1 in
 start)
-	ezstream -q -c /etc/ezstream.xml &
+	ezstream -q -c /etc/ezstream.conf &
 	;;
 stop)
-	kill -KILL `pidof ezstream`
+	kill -s KILL $(pidof ezstream)
 	;;
 restart)
 	$0 stop
