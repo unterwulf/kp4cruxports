@@ -1,0 +1,20 @@
+# Description: Python module and program for processing ID3 tags
+# URL:         http://eyed3.nicfit.net/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot com
+# Depends on:  python
+
+name=eyed3
+version=0.6.17
+release=1
+source=(http://eyed3.nicfit.net/releases/eyeD3-$version.tar.gz)
+
+build() {
+    cd eyeD3-$version
+
+    ./configure --prefix=/usr --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+
+    rm -r $PKG/usr/share
+    rm $PKG/usr/lib/python*/site-packages/eyeD3-*.egg-info
+}
