@@ -8,7 +8,7 @@ release=1
 source=(http://welz.org.za/projects/$name/$name-$version.tar.gz)
 
 build() {
-	cd $name-$version
+    cd $name-$version
 
     make
     install -D -m 755 $name $PKG/usr/sbin/$name
