@@ -10,9 +10,6 @@ protocol imap {
 }
 
 plugin {
-    antispam_signature = X-DSPAM-Signature
-    antispam_signature_missing = error
-
     antispam_trash = Trash
     # antispam_spam_pattern = SPAM
     # antispam_spam_pattern_ignorecase = SPAM
