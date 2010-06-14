@@ -1,0 +1,20 @@
+# Description: Dovecot antispam plugin
+# URL:         http://johannes.sipsolutions.net/Projects/dovecot-antispam
+# Maintainer:  Vitaly Sinlin, vs at kp4 dot ru
+# Depends on:  dovecot
+
+name=dovecot-antispam
+version=1.3
+release=1
+source=(http://johannes.sipsolutions.net/download/$name/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+
+    cp defconfig .config
+    sed -i 's/^#\(BACKEND=mailtrain\)/\1/' .config
+
+    make
+    install -d $PKG/usr/lib/dovecot/modules/imap
+    make DESTDIR=$PKG install
+}

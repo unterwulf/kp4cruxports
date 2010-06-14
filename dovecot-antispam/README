@@ -1,0 +1,25 @@
+POST-INSTALL
+
+To activate this plugin add the following lines into your dovecot.conf.
+Note, this port makes use of the mail sending backend, so the spam and
+notspam aliases should be set up in exim.conf to retrain spam and ham
+respectively.
+
+protocol imap {
+    mail_plugins = antispam
+}
+
+plugin {
+    antispam_signature = X-DSPAM-Signature
+    antispam_signature_missing = error
+
+    antispam_trash = Trash
+    # antispam_spam_pattern = SPAM
+    # antispam_spam_pattern_ignorecase = SPAM
+
+    antispam_mail_tmpdir = /tmp
+    antispam_mail_sendmail = /usr/sbin/exim
+    antispam_mail_sendmail_args = -f;%u;-- # % expansion done by dovecot
+    antispam_mail_spam = spam
+    antispam_mail_notspam = notspam
+}
