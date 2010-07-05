@@ -1,0 +1,15 @@
+# Description: ID3 tags manipulation tool
+# URL:         http://sourceforge.net/projects/id321/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=id321
+version=0.0.1
+release=1
+source=(http://dl.sf.net/project/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+}
