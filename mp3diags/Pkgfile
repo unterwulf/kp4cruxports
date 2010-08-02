@@ -1,0 +1,21 @@
+# Description: MP3 diagnostics tool
+# URL: http://mp3diags.sourceforge.net
+# Maintainer: Vitaly Sinilin, vs at kp4 dot ru
+# Depends on: qt zlib boost
+
+name=mp3diags
+version=1.0.06.051
+release=1
+source=(http://sourceforge.net/projects/$name/files/$name-src/MP3Diags.tar.gz)
+
+build() {
+    cd MP3Diags-$version
+    ./AdjustMt.sh
+    qmake
+    make
+    install -d $PKG/usr/{bin,share/applications,share/pixmaps}
+    install -m 755 bin/MP3Diags $PKG/usr/bin/MP3Diags
+    install -m 644 desktop/MP3Diags.desktop \
+                   $PKG/usr/share/applications/MP3Diags.desktop
+    install -m 644 desktop/MP3Diags48.png $PKG/usr/share/pixmaps/MP3Diags48.png
+}
