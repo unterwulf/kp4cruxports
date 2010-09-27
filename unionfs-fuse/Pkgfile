@@ -1,0 +1,17 @@
+# Description: A userspace unionfs implementation
+# URL:         http://podgorny.cz/moin/UnionFsFuse
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  fuse
+
+name=unionfs-fuse
+version=0.24
+release=1
+source=(http://podgorny.cz/$name/releases/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+    make
+    install -d $PKG/usr/{bin,man/man8}
+    install -m 0755 src/unionfs $PKG/usr/bin/unionfs-fuse
+    install -m 0644 man/unionfs-fuse.8 $PKG/usr/man/man8
+}
