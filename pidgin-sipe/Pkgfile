@@ -1,0 +1,17 @@
+# Description: A third-party Pidgin plugin for Microsoft LCS/OCS
+# URL:         http://sipe.sourceforge.net
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  pidgin intltool glib
+
+name=pidgin-sipe
+version=1.11.2
+release=1
+source=(http://dl.sf.net/project/sipe/sipe/$name-$version/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --disable-nls --disable-telepathy
+    echo > po/LINGUAS
+    make
+    make DESTDIR=$PKG install
+}
