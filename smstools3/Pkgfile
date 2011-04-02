@@ -1,0 +1,23 @@
+# Description: SMS Server Tools 3
+# URL:         http://smstools3.kekekasvi.com
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=smstools3
+version=3.1.14
+release=1
+source=(http://smstools3.kekekasvi.com/packages/$name-$version.tar.gz sms3)
+
+build() {
+   cd $name
+   make
+   install -D -m 755 src/smsd $PKG/usr/bin/smsd
+   install -D -m 755 scripts/sendsms $PKG/usr/bin/sendsms
+   install -D -m 755 scripts/sms2html $PKG/usr/bin/sms2html
+   install -D -m 755 scripts/sms2unicode $PKG/usr/bin/sms2unicode
+   install -D -m 755 scripts/unicode2sms $PKG/usr/bin/unicode2sms
+   install -D -m 644 examples/smsd.conf.easy $PKG/etc/smsd.conf
+   install -d $PKG/var/spool/sms/incoming
+   install -d $PKG/var/spool/sms/outgoing
+   install -d $PKG/var/spool/sms/checked
+   install -D -m 755 ../sms3 $PKG/etc/rc.d/sms3
+}

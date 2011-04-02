@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# /etc/rc.d/sms3: start/stop smsd
+#
+
+# A program which turns power off for couple of seconds:
+RESETMODEMS=/usr/bin/smsd_resetmodems
+
+case $1 in
+start)
+	/usr/bin/smsd -n MAINPROCESS
+	;;
+stop)
+	killall -q /usr/bin/smsd
+	;;
+restart|reload)
+	$0 stop
+	$0 start
+	;;
+force-stop)
+	killall -9 -q /usr/bin/smsd
+	;;
+reset)
+	$0 stop
+	[ -f "$RESETMODEMS" ] && "$RESETMODEMS"
+	sleep 30
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart|force-stop|reset]"
+	;;
+esac
+
+# End of file

@@ -1,0 +1,17 @@
+drwxr-xr-x	root/root	etc/
+drwxr-xr-x	root/root	etc/rc.d/
+-rwxr-xr-x	root/root	etc/rc.d/sms3
+-rw-r--r--	root/root	etc/smsd.conf
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/sendsms
+-rwxr-xr-x	root/root	usr/bin/sms2html
+-rwxr-xr-x	root/root	usr/bin/sms2unicode
+-rwxr-xr-x	root/root	usr/bin/smsd
+-rwxr-xr-x	root/root	usr/bin/unicode2sms
+drwxr-xr-x	root/root	var/
+drwxr-xr-x	root/root	var/spool/
+drwxr-xr-x	root/root	var/spool/sms/
+drwxr-xr-x	root/root	var/spool/sms/checked/
+drwxr-xr-x	root/root	var/spool/sms/incoming/
+drwxr-xr-x	root/root	var/spool/sms/outgoing/
