@@ -4,11 +4,13 @@
 
 name=smstools3
 version=3.1.14
-release=1
-source=(http://smstools3.kekekasvi.com/packages/$name-$version.tar.gz sms3)
+release=2
+source=(http://smstools3.kekekasvi.com/packages/$name-$version.tar.gz
+        $name-$version-iconv.diff sms3)
 
 build() {
    cd $name
+   patch -p1 < $SRC/$name-$version-iconv.diff
    make
    install -D -m 755 src/smsd $PKG/usr/bin/smsd
    install -D -m 755 scripts/sendsms $PKG/usr/bin/sendsms
