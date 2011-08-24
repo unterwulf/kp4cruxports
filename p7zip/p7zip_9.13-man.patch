@@ -1,0 +1,13 @@
+diff -ru p7zip_9.13.orig/man1/7za.1 p7zip_9.13/man1/7za.1
+--- p7zip_9.13.orig/man1/7za.1	2007-09-21 22:53:24.000000000 +0400
++++ p7zip_9.13/man1/7za.1	2011-08-17 12:35:27.000000000 +0400
+@@ -166,9 +166,6 @@
+ add all files from directory "a_directory" to the archive "archive.7z" (with data and header archive encryption on)
+ .SH "SEE ALSO"
+ 7z(1), 7zr(1), bzip2(1), gzip(1), zip(1)
+-.PP
+-.SH "HTML Documentation"
+-{DEST_SHARE_DOC}/MANUAL/index.htm
+ .SH AUTHOR
+ .TP
+ Written for Debian by Mohammed Adnene Trojette.

@@ -1,0 +1,18 @@
+# Description:  A command-line version of the 7-zip compression utility
+# URL:          http://p7zip.sourceforge.net
+# Packager:     Vitaly Sinilin, vs at kp4 dot ru
+
+name=p7zip
+version=9.20.1
+release=1
+
+source=(http://dl.sf.net/project/${name}/${name}/${version}/${name}_${version}_src_all.tar.bz2 \
+        p7zip_9.13-man.patch)
+
+build () {
+    cd ${name}_${version}
+    patch -p 1 -i $SRC/p7zip_9.13-man.patch
+    make 7za OPTFLAGS="${CXXFLAGS}"
+    install -D -m 755 bin/7za $PKG/usr/bin/7za
+    install -D -m 644 man1/7za.1 $PKG/usr/man/man1/7za.1
+}
