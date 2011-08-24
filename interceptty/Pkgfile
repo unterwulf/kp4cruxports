@@ -1,0 +1,15 @@
+# Description: Intercept traffic to and from a serial port
+# URL:         http://www.suspectclass.com/sgifford/interceptty/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=interceptty
+version=0.6
+release=1
+source=(http://www.suspectclass.com/sgifford/$name/files/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+}
