@@ -1,0 +1,17 @@
+# Description: Multicast router utilizing IGMP forwarding
+# URL:         http://sourceforge.net/projects/igmpproxy/
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+
+name=igmpproxy
+version=0.1
+release=1
+source=(http://dl.sf.net/project/$name/$name/$version/$name-$version.tar.gz \
+        igmpproxy)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+    install -D -m 755 ../igmpproxy $PKG/etc/rc.d/igmpproxy
+}
