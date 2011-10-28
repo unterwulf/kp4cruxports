@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# /etc/rc.d/udpxy: start/stop udpxy daemon
+#
+
+case $1 in
+start)
+	sudo -u daemon /usr/bin/udpxy -m eth0 -a eth1 -p 4022 -B 1Mb \
+	                              -l /var/log/udpxy.log &
+	;;
+stop)
+	killall -q /usr/bin/udpxy
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
+
+# End of file
