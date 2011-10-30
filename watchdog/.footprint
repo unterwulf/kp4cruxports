@@ -1,0 +1,16 @@
+drwxr-xr-x	root/root	etc/
+drwxr-xr-x	root/root	etc/rc.d/
+-rwxr-xr-x	root/root	etc/rc.d/watchdog
+-rw-r--r--	root/root	etc/watchdog.conf
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/man/
+drwxr-xr-x	root/root	usr/man/man5/
+-rw-r--r--	root/root	usr/man/man5/watchdog.conf.5.gz
+drwxr-xr-x	root/root	usr/man/man8/
+-rw-r--r--	root/root	usr/man/man8/watchdog.8.gz
+-rw-r--r--	root/root	usr/man/man8/wd_identify.8.gz
+-rw-r--r--	root/root	usr/man/man8/wd_keepalive.8.gz
+drwxr-xr-x	root/root	usr/sbin/
+-rwxr-xr-x	root/root	usr/sbin/watchdog
+-rwxr-xr-x	root/root	usr/sbin/wd_identify
+-rwxr-xr-x	root/root	usr/sbin/wd_keepalive

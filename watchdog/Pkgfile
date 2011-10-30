@@ -1,0 +1,17 @@
+# Description: A software watchdog daemon
+# URL:         http://sourceforge.net/projects/watchdog/
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+
+name=watchdog
+version=5.9
+release=1
+source=(http://dl.sf.net/project/$name/$name/$version/$name-$version.tar.gz
+        watchdog)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+    install -D -m 755 ../watchdog $PKG/etc/rc.d/watchdog
+}

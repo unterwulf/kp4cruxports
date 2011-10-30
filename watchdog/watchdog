@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# /etc/rc.d/watchdog: start/stop watchdog daemon
+#
+
+case $1 in
+start)
+	/usr/sbin/watchdog
+	;;
+stop)
+	kill $(cat /var/run/watchdog.pid)
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
+
+# End of file
