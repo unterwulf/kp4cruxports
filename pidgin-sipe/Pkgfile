@@ -6,7 +6,7 @@
 name=pidgin-sipe
 version=1.11.2
 release=1
-source=(http://dl.sf.net/project/sipe/sipe/$name-$version/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/sipe/sipe/$name-$version/$name-$version.tar.gz)
 
 build() {
     cd $name-$version

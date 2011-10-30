@@ -5,7 +5,7 @@
 name=udpxy
 version=1.0-Chipmunk-PATCH120
 release=1
-source=(http://dl.sf.net/project/$name/$name/Chipmunk-1.0/$name.$version.tgz \
+source=(http://downloads.sourceforge.net/project/$name/$name/Chipmunk-1.0/$name.$version.tgz \
         udpxy)
 
 build() {

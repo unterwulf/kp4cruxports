@@ -6,7 +6,7 @@ name=p7zip
 version=9.20.1
 release=1
 
-source=(http://dl.sf.net/project/${name}/${name}/${version}/${name}_${version}_src_all.tar.bz2 \
+source=(http://downloads.sourceforge.net/project/${name}/${name}/${version}/${name}_${version}_src_all.tar.bz2 \
         p7zip_9.13-man.patch)
 
 build () {

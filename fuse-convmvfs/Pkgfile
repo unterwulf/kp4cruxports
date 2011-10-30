@@ -6,7 +6,7 @@
 name=fuse-convmvfs
 version=0.2.4
 release=1
-source=(http://dl.sf.net/project/$name/$name/$version/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
