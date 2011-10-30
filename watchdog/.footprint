@@ -14,3 +14,6 @@ drwxr-xr-x	root/root	usr/sbin/
 -rwxr-xr-x	root/root	usr/sbin/watchdog
 -rwxr-xr-x	root/root	usr/sbin/wd_identify
 -rwxr-xr-x	root/root	usr/sbin/wd_keepalive
+drwxr-xr-x	root/root	var/
+drwxr-xr-x	root/root	var/log/
+-rw-r--r--	root/root	var/log/watchdog (EMPTY)
