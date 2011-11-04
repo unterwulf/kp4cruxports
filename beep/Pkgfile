@@ -1,0 +1,16 @@
+# Description: A program that beeps the pc speaker any number of ways
+# URL:         http://www.johnath.com/beep/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=beep
+version=1.3
+release=1
+source=(http://www.johnath.com/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make
+    install -d $PKG/usr/{bin,man/man1}
+    install -m 755 beep $PKG/usr/bin/beep
+    install -m 644 beep.1.gz $PKG/usr/man/man1/beep.1.gz
+}
