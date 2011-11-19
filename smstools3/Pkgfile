@@ -4,9 +4,9 @@
 
 name=smstools3
 version=3.1.14
-release=2
+release=3
 source=(http://smstools3.kekekasvi.com/packages/$name-$version.tar.gz
-        $name-$version-iconv.diff sms3)
+        $name-$version-iconv.diff smsd.conf sms3)
 
 build() {
    cd $name
@@ -17,9 +17,13 @@ build() {
    install -D -m 755 scripts/sms2html $PKG/usr/bin/sms2html
    install -D -m 755 scripts/sms2unicode $PKG/usr/bin/sms2unicode
    install -D -m 755 scripts/unicode2sms $PKG/usr/bin/unicode2sms
-   install -D -m 644 examples/smsd.conf.easy $PKG/etc/smsd.conf
-   install -d $PKG/var/spool/sms/incoming
-   install -d $PKG/var/spool/sms/outgoing
-   install -d $PKG/var/spool/sms/checked
+
+   install -d $PKG/var/{log/smsd,run,spool/sms}
+   install -d -o sms -g sms $PKG/var/run/smsd
+   touch $PKG/var/log/smsd/smsd.log
+   chown sms.sms $PKG/var/log/smsd/smsd.log
+   chmod 644 $PKG/var/log/smsd/smsd.log
+   install -d -m 775 -o sms -g sms $PKG/var/spool/sms/{calls,checked,failed,incoming,outgoing,sent}
+   install -D -m 644 ../smsd.conf $PKG/etc/smsd.conf
    install -D -m 755 ../sms3 $PKG/etc/rc.d/sms3
 }

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+getent group sms   || /usr/sbin/groupadd -g 31 sms
+getent passwd sms  || /usr/sbin/useradd  -g sms -G dialout -u 31 -d /var/run/smsd -s /bin/false sms
+/usr/bin/passwd -l sms
