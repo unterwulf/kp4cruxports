@@ -1,0 +1,12 @@
+\.git$
+\.gitignore$
+\.svn$
+\.tar\.gz$
+\.tgz$
+\.partial$
+\.tar\.bz2$
+\.zip$
+(^|/)CVS(/|$)
+.*~$
+^robots.txt$
+^index.html$
