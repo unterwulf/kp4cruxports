@@ -1,0 +1,30 @@
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/csv2rec
+-rwxr-xr-x	root/root	usr/bin/rec2csv
+-rwxr-xr-x	root/root	usr/bin/recdel
+-rwxr-xr-x	root/root	usr/bin/recfix
+-rwxr-xr-x	root/root	usr/bin/recfmt
+-rwxr-xr-x	root/root	usr/bin/recinf
+-rwxr-xr-x	root/root	usr/bin/recins
+-rwxr-xr-x	root/root	usr/bin/recsel
+-rwxr-xr-x	root/root	usr/bin/recset
+drwxr-xr-x	root/root	usr/include/
+-rw-r--r--	root/root	usr/include/rec.h
+drwxr-xr-x	root/root	usr/lib/
+-rw-r--r--	root/root	usr/lib/librec.a
+-rwxr-xr-x	root/root	usr/lib/librec.la
+lrwxrwxrwx	root/root	usr/lib/librec.so -> librec.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/librec.so.0 -> librec.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/librec.so.0.0.0
+drwxr-xr-x	root/root	usr/man/
+drwxr-xr-x	root/root	usr/man/man1/
+-rw-r--r--	root/root	usr/man/man1/csv2rec.1.gz
+-rw-r--r--	root/root	usr/man/man1/rec2csv.1.gz
+-rw-r--r--	root/root	usr/man/man1/recdel.1.gz
+-rw-r--r--	root/root	usr/man/man1/recfix.1.gz
+-rw-r--r--	root/root	usr/man/man1/recfmt.1.gz
+-rw-r--r--	root/root	usr/man/man1/recinf.1.gz
+-rw-r--r--	root/root	usr/man/man1/recins.1.gz
+-rw-r--r--	root/root	usr/man/man1/recsel.1.gz
+-rw-r--r--	root/root	usr/man/man1/recset.1.gz
