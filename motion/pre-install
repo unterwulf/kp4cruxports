@@ -1,0 +1,5 @@
+#!/bin/sh
+
+getent group motion  || /usr/sbin/groupadd -g 32 motion
+getent passwd motion || /usr/sbin/useradd  -g motion -G video -u 32 -d /var/empty -s /bin/false motion
+/usr/bin/passwd -l motion

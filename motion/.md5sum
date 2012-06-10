@@ -1,0 +1,9 @@
+88e1be9d9db2e78d9e864ecddd25c890  avcodec.patch
+573c335b527b58530a5ae5d51304fd72  motion
+7a228c0f68f503dadefca69aff241012  motion-3.2.12-pidfile.patch
+1ba0065ed50509aaffb171594c689f46  motion-3.2.12.tar.gz
+aea188185e9643c390b6b11b0d1ba3ce  motion.conf
+8daed3aa491c361163033fed5b73b117  thread1.conf
+bc4eb00fc111c2db12f2aa75b1f57b05  thread2.conf
+8ad2e29477b0cea1d5281c253c320d44  thread3.conf
+8af960967e23e465773a60c193e82efe  thread4.conf

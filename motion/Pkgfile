@@ -1,0 +1,32 @@
+# Description: Video signal motion detection
+# URL:         http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Packager:    Daryl Fonseca-Holt, wyatt at prairieturtle dot ca
+# Depends on:  libjpeg ffmpeg zlib
+
+name=motion
+version=3.2.12
+release=3
+
+source=(http://sourceforge.net/projects/motion/files/motion%20-%203.2/3.2.12/motion-3.2.12.tar.gz \
+        avcodec.patch motion-3.2.12-pidfile.patch motion \
+        motion.conf thread1.conf thread2.conf thread3.conf thread4.conf)
+
+build() {
+    cd ${name}-${version}
+
+    patch -p0 -i $SRC/avcodec.patch
+    patch -p1 -i $SRC/motion-3.2.12-pidfile.patch
+
+    ./configure --prefix=/usr --mandir=/usr/man --sysconfdir=/etc
+    make
+    make DESTDIR=$PKG install
+
+    rm -f $PKG/etc/motion-dist.conf
+    rm -rf $PKG/usr/share/
+    install -d -o motion -g motion -m 755 $PKG/var/run/motion
+    for conf in motion thread1 thread2 thread3 thread4; do
+        install -D -g motion -m 640 ../$conf.conf $PKG/etc/motion/$conf.conf
+    done
+    install -D -m 755 ../motion $PKG/etc/rc.d/motion
+}
