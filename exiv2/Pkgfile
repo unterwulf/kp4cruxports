@@ -1,0 +1,15 @@
+# Description: Exif and Iptc metadata manipulation library and tools.
+# URL:         http://www.exiv2.org
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=exiv2
+version=0.23
+release=1
+source=(http://www.exiv2.org/exiv2-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    ./configure --disable-nls --prefix=/usr --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+}
