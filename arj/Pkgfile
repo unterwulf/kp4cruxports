@@ -5,13 +5,15 @@
 
 name=arj
 version=3.10.22
-release=1
+release=2
 source=(http://arj.sourceforge.net/files/$name-$version.tar.gz \
-        arj-3.10.22-build.patch)
+        arj-3.10.22-build.patch \
+        005_use_system_strnlen.patch)
 
 build() {
-    patch -p0 < arj-3.10.22-build.patch
     cd $name-$version
+    patch -p1 < ../arj-3.10.22-build.patch
+    patch -p1 < ../005_use_system_strnlen.patch
     ( cd gnu; autoconf; ./configure --prefix=/usr --mandir=/usr/man )
     make
     make DESTDIR=$PKG install
