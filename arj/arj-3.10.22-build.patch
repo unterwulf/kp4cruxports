@@ -1,0 +1,42 @@
+diff -pruN arj-3.10.22.orig/gnu/makefile.in arj-3.10.22/gnu/makefile.in
+--- arj-3.10.22.orig/gnu/makefile.in	2004-04-17 15:28:06.000000000 +0400
++++ arj-3.10.22/gnu/makefile.in	2012-07-16 13:10:38.000000000 +0400
+@@ -251,9 +251,8 @@ endif
+ ARJCRYPT_OBJS = $(patsubst %,$(ARJCRYPT_DIR)/%, \
+ 		integr.o gost.o gost_t.o nmsg_crp.o arjcrypt.o)
+ 
+-$(ARJCRYPT_DIR)/arjcrypt$d: $(ARJCRYPT_OBJS) $(TOOLS_DIR)/postproc$x
++$(ARJCRYPT_DIR)/arjcrypt$d: $(ARJCRYPT_OBJS)
+ 	$(CC) $(ALL_CFLAGS) $(DLL_FLAGS) -o $@ $(ARJCRYPT_OBJS) $(ARJCRYPT_DEF) $(LIBS)
+-	$(TOOLS_DIR)/postproc $@
+ 
+ $(BASEDIR)/nmsg_crp.c: $(TOOLS_DIR)/msgbind$x $(RESFILE)
+ 	$(TOOLS_DIR)/msgbind $(RESFILE) msg_crp $(OS_ID) $(PACKAGE) $(LOCALE) $(BASEDIR)
+@@ -339,7 +338,6 @@ ARJ_OBJS = $(patsubst %,$(ARJ_DIR)/%, \
+ $(ARJ_DIR)/arj$x: $(ARJ_OBJS) \
+ 		  $(RES_DIR)/$(LOCALE)/arjl.txt $(RES_DIR)/$(LOCALE)/arjs.txt \
+ 		  $(TOOLS_DIR)/join$x \
+-		  $(TOOLS_DIR)/postproc$x \
+ 		  $(SFXSTUB_DIR)/sfxstub$x \
+ 		  $(ARJSFXV_DIR)/arjsfxv$x \
+ 		  $(ARJSFX_DIR)/arjsfx$x \
+@@ -352,7 +350,6 @@ $(ARJ_DIR)/arj$x: $(ARJ_OBJS) \
+ 	rm -f $(BASEDIR)/help.arj
+ 	$(ARJ_DIR)/arj$x a $(BASEDIR)/help.arj -+ -t1f -2e -e -jm -jh65535 -jt $(RES_DIR)/$(LOCALE)/arj?.txt
+ 	$(TOOLS_DIR)/join $(ARJ_DIR)/arj$x $(BASEDIR)/help.arj
+-	$(TOOLS_DIR)/postproc $@
+ 
+ $(BASEDIR)/fmsg_arj.c $(BASEDIR)/imsg_arj.c $(BASEDIR)/nmsg_arj.c: $(TOOLS_DIR)/msgbind$x $(RESFILE)
+ 	$(TOOLS_DIR)/msgbind $(RESFILE) msg_arj $(OS_ID) $(PACKAGE) $(LOCALE) $(BASEDIR)
+@@ -367,10 +364,8 @@ REARJ_OBJS = $(patsubst %,$(REARJ_DIR)/%
+ 	     environ.o arjtypes.o filelist.o scrnio.o arjsec_h.o arjsec_l.o \
+              externs.o)
+ 
+-$(REARJ_DIR)/rearj$x: $(REARJ_OBJS) \
+-		      $(TOOLS_DIR)/postproc$x
++$(REARJ_DIR)/rearj$x: $(REARJ_OBJS)
+ 	$(CC) $(ALL_CFLAGS) $(LDFLAGS) -o $@ $(REARJ_OBJS) $(LIBS)
+-	$(TOOLS_DIR)/postproc $@
+ 
+ $(BASEDIR)/fmsg_rej.c $(BASEDIR)/imsg_rej.c $(BASEDIR)/nmsg_rej.c: $(TOOLS_DIR)/msgbind$x $(RESFILE)
+ 	$(TOOLS_DIR)/msgbind $(RESFILE) msg_rej $(OS_ID) $(PACKAGE) $(LOCALE) $(BASEDIR)

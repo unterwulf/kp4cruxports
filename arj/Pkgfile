@@ -1,0 +1,19 @@
+# Description: The ARJ Archiver
+# URL:         http://arj.sourceforge.net
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Packager:    Falcony, falcony at users dot sourceforge dot net
+
+name=arj
+version=3.10.22
+release=1
+source=(http://arj.sourceforge.net/files/$name-$version.tar.gz \
+        arj-3.10.22-build.patch)
+
+build() {
+    patch -p0 < arj-3.10.22-build.patch
+    cd $name-$version
+    ( cd gnu; autoconf; ./configure --prefix=/usr --mandir=/usr/man )
+    make
+    make DESTDIR=$PKG install
+    rm $PKG/usr/bin/arj-register $PKG/usr/man/man1/arj-register.1
+}
