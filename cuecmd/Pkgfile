@@ -1,6 +1,6 @@
 # Description: Simple cue sheet parser written in POSIX shell
 # URL:         https://github.com/unterwulf/cuecmd
-# Maintainer:  Vitaly Sinlin, vs at kp4 dot ru
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 
 name=cuecmd
 version=0.0.1
