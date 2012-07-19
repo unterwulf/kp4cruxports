@@ -1,0 +1,13 @@
+# Description: Simple cue sheet parser written in POSIX shell
+# URL:         https://github.com/unterwulf/cuecmd
+# Maintainer:  Vitaly Sinlin, vs at kp4 dot ru
+
+name=cuecmd
+version=0.0.1
+release=1
+source=(https://github.com/downloads/unterwulf/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make PREFIX=/usr DESTDIR=$PKG install
+}
