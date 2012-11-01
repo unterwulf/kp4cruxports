@@ -5,13 +5,14 @@
 
 name=davfs2
 version=1.4.7
-release=1
+release=2
 source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz \
-    davfs2-1.4.7-mandir.patch)
+    davfs2-1.4.7-mandir.patch davfs2-1.4.7-links.patch)
 
 build() {
     cd $name-$version
     patch -p1 < ../davfs2-1.4.7-mandir.patch
+    patch -p1 < ../davfs2-1.4.7-links.patch
     ./configure \
         LINGUAS="" \
         --prefix=/usr \

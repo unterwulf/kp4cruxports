@@ -1,0 +1,14 @@
+diff -pruN davfs2-1.4.7.orig/src/Makefile.am davfs2-1.4.7/src/Makefile.am
+--- davfs2-1.4.7.orig/src/Makefile.am	2009-04-14 23:54:56.000000000 +0400
++++ davfs2-1.4.7/src/Makefile.am	2012-11-01 18:36:42.000000000 +0400
+@@ -51,8 +51,8 @@ install-exec-hook:
+ 	chmod u+s $(DESTDIR)$(sbindir)/mount.davfs; \
+ 	if test "$(sbindir)" != "$(ssbindir)"; then \
+ 	  $(mkinstalldirs) $(DESTDIR)$(ssbindir); \
+-	  $(LN_S) -f $(DESTDIR)$(sbindir)/mount.davfs $(DESTDIR)$(ssbindir)/mount.davfs; \
+-	  $(LN_S) -f $(DESTDIR)$(sbindir)/umount.davfs $(DESTDIR)$(ssbindir)/umount.davfs; \
++	  $(LN_S) -f $(sbindir)/mount.davfs $(DESTDIR)$(ssbindir)/mount.davfs; \
++	  $(LN_S) -f $(sbindir)/umount.davfs $(DESTDIR)$(ssbindir)/umount.davfs; \
+ 	fi
+ 
+ uninstall-hook:
