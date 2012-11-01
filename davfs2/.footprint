@@ -1,0 +1,19 @@
+drwxr-xr-x	root/root	etc/
+drwxr-xr-x	root/root	etc/davfs2/
+drwxr-xr-x	root/root	etc/davfs2/certs/
+drwx------	root/root	etc/davfs2/certs/private/
+-rw-r--r--	root/root	etc/davfs2/davfs2.conf
+-rw-------	root/root	etc/davfs2/secrets
+drwxr-xr-x	root/root	sbin/
+lrwxrwxrwx	root/root	sbin/mount.davfs -> /home/vs/tmp/pkgmk/davfs2/pkg/usr/sbin/mount.davfs
+lrwxrwxrwx	root/root	sbin/umount.davfs -> /home/vs/tmp/pkgmk/davfs2/pkg/usr/sbin/umount.davfs
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/man/
+drwxr-xr-x	root/root	usr/man/man5/
+-rw-r--r--	root/root	usr/man/man5/davfs2.conf.5.gz
+drwxr-xr-x	root/root	usr/man/man8/
+-rw-r--r--	root/root	usr/man/man8/mount.davfs.8.gz
+-rw-r--r--	root/root	usr/man/man8/umount.davfs.8.gz
+drwxr-xr-x	root/root	usr/sbin/
+-rwsr-xr-x	root/root	usr/sbin/mount.davfs
+-rwxr-xr-x	root/root	usr/sbin/umount.davfs

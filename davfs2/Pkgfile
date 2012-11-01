@@ -1,0 +1,24 @@
+# Description: WebDAV FUSE filesystem
+# URL:         http://savannah.nongnu.org/projects/davfs2
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  fuse neon
+
+name=davfs2
+version=1.4.7
+release=1
+source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.gz \
+    davfs2-1.4.7-mandir.patch)
+
+build() {
+    cd $name-$version
+    patch -p1 < ../davfs2-1.4.7-mandir.patch
+    ./configure \
+        LINGUAS="" \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --mandir=/usr/man \
+        --disable-nls
+    make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/share
+}

@@ -1,0 +1,69 @@
+diff -pruN davfs2-1.4.7.orig/man/de/Makefile.am davfs2-1.4.7/man/de/Makefile.am
+--- davfs2-1.4.7.orig/man/de/Makefile.am	2009-04-27 23:29:13.000000000 +0400
++++ davfs2-1.4.7/man/de/Makefile.am	2012-11-01 18:20:09.000000000 +0400
+@@ -22,7 +22,6 @@
+ pkgsysconfdir = $(sysconfdir)/@PACKAGE@
+ pkglocalstatedir = $(dav_localstatedir)/mount.davfs
+ pkgsyscachedir = $(dav_syscachedir)/@PACKAGE@
+-mandir = $(datadir)/man
+ manual5dir = $(mandir)/de/man5
+ manual8dir = $(mandir)/de/man8
+ 
+diff -pruN davfs2-1.4.7.orig/man/de/Makefile.in davfs2-1.4.7/man/de/Makefile.in
+--- davfs2-1.4.7.orig/man/de/Makefile.in	2012-07-19 15:46:20.000000000 +0400
++++ davfs2-1.4.7/man/de/Makefile.in	2012-11-01 18:20:23.000000000 +0400
+@@ -184,7 +184,7 @@ libdir = @libdir@
+ libexecdir = @libexecdir@
+ localedir = @localedir@
+ localstatedir = @localstatedir@
+-mandir = $(datadir)/man
++mandir = @mandir@
+ mkdir_p = @mkdir_p@
+ oldincludedir = @oldincludedir@
+ pdfdir = @pdfdir@
+diff -pruN davfs2-1.4.7.orig/man/es/Makefile.am davfs2-1.4.7/man/es/Makefile.am
+--- davfs2-1.4.7.orig/man/es/Makefile.am	2009-04-27 23:29:13.000000000 +0400
++++ davfs2-1.4.7/man/es/Makefile.am	2012-11-01 18:20:01.000000000 +0400
+@@ -22,7 +22,6 @@
+ pkgsysconfdir = $(sysconfdir)/@PACKAGE@
+ pkglocalstatedir = $(dav_localstatedir)/mount.davfs
+ pkgsyscachedir = $(dav_syscachedir)/@PACKAGE@
+-mandir = $(datadir)/man
+ manual5dir = $(mandir)/es/man5
+ #manual8dir = $(mandir)/es/man8
+ 
+diff -pruN davfs2-1.4.7.orig/man/es/Makefile.in davfs2-1.4.7/man/es/Makefile.in
+--- davfs2-1.4.7.orig/man/es/Makefile.in	2012-07-19 15:46:20.000000000 +0400
++++ davfs2-1.4.7/man/es/Makefile.in	2012-11-01 18:20:32.000000000 +0400
+@@ -184,7 +184,7 @@ libdir = @libdir@
+ libexecdir = @libexecdir@
+ localedir = @localedir@
+ localstatedir = @localstatedir@
+-mandir = $(datadir)/man
++mandir = @mandir@
+ mkdir_p = @mkdir_p@
+ oldincludedir = @oldincludedir@
+ pdfdir = @pdfdir@
+diff -pruN davfs2-1.4.7.orig/man/Makefile.am davfs2-1.4.7/man/Makefile.am
+--- davfs2-1.4.7.orig/man/Makefile.am	2009-04-27 23:29:12.000000000 +0400
++++ davfs2-1.4.7/man/Makefile.am	2012-11-01 18:19:52.000000000 +0400
+@@ -22,7 +22,6 @@
+ pkgsysconfdir = $(sysconfdir)/@PACKAGE@
+ pkglocalstatedir = $(dav_localstatedir)/mount.davfs
+ pkgsyscachedir = $(dav_syscachedir)/@PACKAGE@
+-mandir = $(datadir)/man
+ manual5dir = $(mandir)/man5
+ manual8dir = $(mandir)/man8
+ SUBDIRS = @dav_linguas@
+diff -pruN davfs2-1.4.7.orig/man/Makefile.in davfs2-1.4.7/man/Makefile.in
+--- davfs2-1.4.7.orig/man/Makefile.in	2012-07-19 15:46:20.000000000 +0400
++++ davfs2-1.4.7/man/Makefile.in	2012-11-01 18:09:49.000000000 +0400
+@@ -223,7 +223,7 @@ libdir = @libdir@
+ libexecdir = @libexecdir@
+ localedir = @localedir@
+ localstatedir = @localstatedir@
+-mandir = $(datadir)/man
++mandir = @mandir@
+ mkdir_p = @mkdir_p@
+ oldincludedir = @oldincludedir@
+ pdfdir = @pdfdir@
