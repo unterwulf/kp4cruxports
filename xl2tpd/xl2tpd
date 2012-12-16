@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# /etc/rc.d/xl2tpd: start/stop xl2tpd daemon
+#
+
+PIDFILE=/var/run/xl2tpd/xl2tpd.pid
+
+case $1 in
+start)
+	/usr/sbin/xl2tpd -p $PIDFILE
+	;;
+stop)
+	kill $(cat $PIDFILE)
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|restart]"
+	;;
+esac
+
+# End of file

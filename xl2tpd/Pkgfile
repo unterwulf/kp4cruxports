@@ -1,0 +1,17 @@
+# Description: Layer 2 Tunneling Protocol (L2TP) daemon
+# URL:         http://www.xelerance.com/services/software/xl2tpd/
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+
+name=xl2tpd
+version=1.3.1
+release=1
+source=(https://github.com/xelerance/$name/archive/v${version}.tar.gz xl2tpd)
+
+build() {
+    cd $name-$version
+    make DESTDIR=$PKG PREFIX=/usr MANDIR=$PKG/usr/man install
+    install -D -m 640 doc/l2tp-secrets.sample $PKG/etc/xl2tpd/l2tp-secrets
+    install -D -m 644 doc/l2tpd.conf.sample $PKG/etc/xl2tpd/xl2tpd.conf
+    install -d -m 755 $PKG/var/run/xl2tpd
+    install -D -m 755 $SRC/xl2tpd $PKG/etc/rc.d/xl2tpd
+}
