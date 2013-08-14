@@ -1,0 +1,14 @@
+# Description: Standard unix password manager
+# URL:         http://http://zx2c4.com/projects/password-store/
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  gnupg git pwgen tree
+
+name=pass
+version=1.4.2
+release=1
+source=(http://git.zx2c4.com/password-store/snapshot/password-store-$version.tar.xz)
+
+build() {
+    cd password-store-$version
+    make DESTDIR=$PKG PREFIX=/usr MANDIR=/usr/man install
+}
