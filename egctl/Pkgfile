@@ -1,0 +1,14 @@
+# Description: EnerGenie EG-PMS-LAN control utility
+# URL:         http://sourceforge.net/projects/egctl/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=egctl
+version=0.1
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make
+    make PREFIX=/usr mandir=/usr/man DESTDIR=$PKG install
+}
