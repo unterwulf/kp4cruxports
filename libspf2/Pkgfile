@@ -3,7 +3,7 @@
 # Maintainer: Vitaly Sinilin, vs at kp4 dot ru
 
 name=libspf2
-version=1.2.9
+version=1.2.10
 release=1
 source=(http://www.libspf2.org/spf/$name-$version.tar.gz)
 
