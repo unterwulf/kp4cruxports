@@ -1,0 +1,14 @@
+# Description: Dedicated IPX-over-UDP server for DOSBox
+# URL:         http://zytor.com/pub/games/dosbox
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=ipxrelay
+version=0.2
+release=1
+source=(http://zytor.com/pub/games/dosbox/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make
+    install -D -m 755 ipxrelay $PKG/usr/bin/ipxrelay
+}
