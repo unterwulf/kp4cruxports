@@ -1,0 +1,14 @@
+# Description: RCS reloaded with a modern UI
+# URL:         http://www.catb.org/~esr/src/
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  rcs
+
+name=src
+version=0.13
+release=1
+source=(http://www.catb.org/~esr/$name/$name-$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make DESTDIR=$PKG prefix=/usr mandir=/man install
+}
