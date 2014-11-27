@@ -1,0 +1,16 @@
+# Description: Revision Control System manages multiple revisions of files
+# URL:         http://www.gnu.org/software/rcs/
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  ed
+
+name=rcs
+version=5.9.3
+release=1
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr --mandir=/usr/man
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/share
+}
