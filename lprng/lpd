@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# /etc/rc.d/lpd: start/stop lp daemon
+#
+
+PORT=515
+LOCKFILE=/var/run/lpd/lpd.$PORT
+
+case $1 in
+start)
+	/usr/sbin/lpd -p $PORT
+	;;
+stop)
+	read pid < $LOCKFILE
+	[ -n "$pid" ] && kill -s INT $pid
+	;;
+status)
+	/usr/sbin/lpc lpd
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|status|restart]"
+	;;
+esac
+
+# End of file

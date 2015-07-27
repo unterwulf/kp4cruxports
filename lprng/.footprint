@@ -1,0 +1,55 @@
+drwxr-xr-x	root/root	etc/
+drwxr-xr-x	root/root	etc/lpd/
+-rw-r--r--	root/root	etc/lpd/lpd.conf
+-rw-r--r--	root/root	etc/lpd/lpd.perms
+-rw-r--r--	root/root	etc/printcap
+drwxr-xr-x	root/root	etc/rc.d/
+-rwxr-xr-x	root/root	etc/rc.d/lpd
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/bin/
+lrwxrwxrwx	root/root	usr/bin/cancel -> lprm
+lrwxrwxrwx	root/root	usr/bin/lp -> lpr
+-rwxr-xr-x	root/root	usr/bin/lpq
+-rwxr-xr-x	root/root	usr/bin/lpr
+-rwxr-xr-x	root/root	usr/bin/lprm
+-rwxr-xr-x	root/root	usr/bin/lpstat
+drwxr-xr-x	root/root	usr/lib/
+-rw-r--r--	root/root	usr/lib/liblpr.a
+-rwxr-xr-x	root/root	usr/lib/liblpr.la
+lrwxrwxrwx	root/root	usr/lib/liblpr.so -> liblpr.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/liblpr.so.0 -> liblpr.so.0.0.0
+-rwxr-xr-x	root/root	usr/lib/liblpr.so.0.0.0
+drwxr-xr-x	root/root	usr/lib/lprng/
+drwxr-xr-x	root/root	usr/lib/lprng/filters/
+-rwxr-xr-x	root/root	usr/lib/lprng/filters/lpbanner
+-rwxr-xr-x	root/root	usr/lib/lprng/filters/lpf
+-rwxr-xr-x	root/root	usr/lib/lprng/filters/pclbanner
+-rwxr-xr-x	root/root	usr/lib/lprng/filters/psbanner
+drwxr-xr-x	root/root	usr/man/
+drwxr-xr-x	root/root	usr/man/man1/
+-rw-r--r--	root/root	usr/man/man1/cancel.1.gz
+-rw-r--r--	root/root	usr/man/man1/lp.1.gz
+-rw-r--r--	root/root	usr/man/man1/lpbanner.1.gz
+-rw-r--r--	root/root	usr/man/man1/lpf.1.gz
+-rw-r--r--	root/root	usr/man/man1/lpq.1.gz
+-rw-r--r--	root/root	usr/man/man1/lpr.1.gz
+-rw-r--r--	root/root	usr/man/man1/lprm.1.gz
+-rw-r--r--	root/root	usr/man/man1/lpstat.1.gz
+-rw-r--r--	root/root	usr/man/man1/monitor.1.gz
+-rw-r--r--	root/root	usr/man/man1/pclbanner.1.gz
+-rw-r--r--	root/root	usr/man/man1/psbanner.1.gz
+drwxr-xr-x	root/root	usr/man/man5/
+-rw-r--r--	root/root	usr/man/man5/lpd.conf.5.gz
+-rw-r--r--	root/root	usr/man/man5/lpd.perms.5.gz
+-rw-r--r--	root/root	usr/man/man5/printcap.5.gz
+drwxr-xr-x	root/root	usr/man/man8/
+-rw-r--r--	root/root	usr/man/man8/lpc.8.gz
+-rw-r--r--	root/root	usr/man/man8/lpd.8.gz
+drwxr-xr-x	root/root	usr/sbin/
+-rwxr-xr-x	root/root	usr/sbin/lpc
+-rwxr-xr-x	root/root	usr/sbin/lpd
+drwxr-xr-x	root/root	var/
+drwxr-xr-x	root/root	var/run/
+drwxr-xr-x	lpd/lp	var/run/lpd/
+drwxr-xr-x	root/root	var/spool/
+drwxr-xr-x	lpd/lp	var/spool/lpd/

@@ -1,0 +1,40 @@
+# Description: Enhanced printer spooler from the past
+# URL:         http://www.lprng.com
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+
+name=lprng
+version=3.8.35
+release=1
+source=(ftp://lprng.com/pub/LPRng/LPRng/LPRng-$version.tgz lpd)
+
+build() {
+	cd LPRng-$version
+
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/man \
+		--libexecdir=/usr/lib/lprng \
+		--with-userid=lpd \
+		--with-groupid=lp \
+		--with-done_jobs=20 \
+		--with-lockfile=/var/run/lpd/lpd \
+		--with-unix_socket_path=/var/run/lpd/lpd.sock \
+		--enable-shared \
+		--disable-setuid \
+		--disable-ssl \
+		--disable-tcpwrappers \
+		--disable-nls
+
+	make SHELL=/bin/sh
+	make SHELL=/bin/sh DESTDIR=$PKG install
+
+	find $PKG -name \*.sample -delete
+	rm -rf $PKG/etc/rc.d/init.d
+	rm -rf $PKG/usr/share $PKG/usr/sbin/{checkpc,lprng_certs,lprng_index_certs}
+	rm -rf $PKG/usr/man/man8/checkpc.8 $PKG/usr/man/man1/{lprng_certs.1,lprng_index_certs.1}
+
+	install -m 755 $SRC/lpd $PKG/etc/rc.d/lpd
+	install -d 755 -o lpd -g lp $PKG/var/run/lpd
+	install -d 755 -o lpd -g lp $PKG/var/spool/lpd
+}

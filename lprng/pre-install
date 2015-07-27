@@ -1,0 +1,4 @@
+#!/bin/sh
+
+getent passwd lpd || /usr/sbin/useradd -g lp -u 33 -d /var/empty -s /bin/false lpd
+/usr/bin/passwd -l lpd
