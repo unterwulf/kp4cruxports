@@ -1,0 +1,34 @@
+diff -pu ipxrelay-0.2.orig/ipxrelay.c ipxrelay-0.2/ipxrelay.c
+--- ipxrelay-0.2.orig/ipxrelay.c	2011-01-17 09:46:30.000000000 +0300
++++ ipxrelay-0.2/ipxrelay.c	2015-08-31 22:27:24.000000000 +0300
+@@ -213,8 +213,6 @@ static int register_client(int fd, const
+     struct ipx_client *c;
+     struct ipx_header reply;
+ 
+-    if (!is_ipx_null(&hdr->src_addr))
+-	return -1;
+ 
+     /*
+      * A current DOSBOX registration packet carries no payload.
+@@ -229,8 +227,19 @@ static int register_client(int fd, const
+     memcpy(&c->sin, from, sizeof c->sin);
+ 
+     c->ipx.network = 0;
+-    c->ipx.ip_addr = c->sin.sin_addr.s_addr;
+-    c->ipx.ip_port = c->sin.sin_port;
++    if (!is_ipx_null(&hdr->src_addr)) {
++        /* Let peer to choose its node address. DOSBOX doesn't do that,
++         * it is for ipxbox. */
++        c->ipx.ip_addr = hdr->src_addr.ip_addr;
++        c->ipx.ip_port = hdr->src_addr.ip_port;
++    } else {
++        if ((ntohl(c->sin.sin_addr.s_addr) >> 24) & 1)
++            c->ipx.ip_addr = htonl(ntohl(c->sin.sin_addr.s_addr) & ~(1UL << 24));
++        else
++            c->ipx.ip_addr = c->sin.sin_addr.s_addr;
++
++        c->ipx.ip_port = c->sin.sin_port;
++    }
+ 
+     /* Update time */
+     c->last_seen = now;

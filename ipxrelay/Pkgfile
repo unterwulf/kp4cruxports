@@ -4,11 +4,14 @@
 
 name=ipxrelay
 version=0.2
-release=1
-source=(http://zytor.com/pub/games/dosbox/$name-$version.tar.gz)
+release=2
+source=(http://zytor.com/pub/games/dosbox/$name-$version.tar.gz
+        $name-0.2-ipxbox.patch)
 
 build() {
     cd $name-$version
+
+    patch -p1 < $SRC/$name-0.2-ipxbox.patch
     make
     install -D -m 755 ipxrelay $PKG/usr/bin/ipxrelay
 }
