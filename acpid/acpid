@@ -3,21 +3,25 @@
 # /etc/rc.d/acpid: start/stop ACPI daemon
 #
 
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/acpid
+OPTS="-c /etc/acpi/events"
+PID=/var/run/acpid.pid
+
 case $1 in
 start)
 	if [ -e /proc/acpi ]; then
-		/usr/sbin/acpid -c /etc/acpi/events
+		$SSD --start --pidfile $PID --exec $PROG -- $OPTS
 	fi
 	;;
 stop)
-	killall -q /usr/sbin/acpid
+	$SSD --stop --remove-pidfile --retry 10 --pidfile $PID
 	;;
 reload)
-	kill -HUP $(pidof acpid)
+	$SSD --stop --signal HUP --pidfile $PID
 	;;
 restart)
 	$0 stop
-	sleep 2
 	$0 start
 	;;
 *)
