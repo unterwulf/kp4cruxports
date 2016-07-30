@@ -4,17 +4,17 @@
 # Packager: Attic, unknown at unknown
 
 name=acpid
-version=1.0.10-netlink6
+version=2.0.27
 release=1
-source=(http://www.tedfelix.com/linux/$name-$version.tar.gz \
+source=(http://downloads.sourceforge.net/sourceforge/acpid2/$name-$version.tar.xz \
         acpid default default.sh)
 
 build() {
-    cd $name-$version
-    mkdir -p $PKG/usr/{bin,sbin,man/man8}
-    make INSTPREFIX=/usr
-    make INSTPREFIX=$PKG MAN8DIR=$PKG/usr/man/man8 install
-    install -D -m 755 ../acpid      $PKG/etc/rc.d/acpid
-    install -D -m 644 ../default    $PKG/etc/acpi/events/default
-    install -D -m 755 ../default.sh $PKG/etc/acpi/default.sh
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG dist_doc_DATA= install
+	install -D -m 755 ../acpid      $PKG/etc/rc.d/acpid
+	install -D -m 644 ../default    $PKG/etc/acpi/events/default
+	install -D -m 755 ../default.sh $PKG/etc/acpi/default.sh
 }
