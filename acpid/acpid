@@ -10,9 +10,7 @@ PID=/var/run/acpid.pid
 
 case $1 in
 start)
-	if [ -e /proc/acpi ]; then
-		$SSD --start --pidfile $PID --exec $PROG -- $OPTS
-	fi
+	$SSD --start --pidfile $PID --exec $PROG -- $OPTS
 	;;
 stop)
 	$SSD --stop --remove-pidfile --retry 10 --pidfile $PID
