@@ -1,0 +1,8 @@
+#
+# /etc/acpi/powerbtn: acpid action for power button
+#
+
+event=button[ /]power
+action=/sbin/shutdown -h -P now "Power button pressed"
+
+# End of file

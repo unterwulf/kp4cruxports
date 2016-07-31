@@ -5,12 +5,11 @@
 
 SSD=/sbin/start-stop-daemon
 PROG=/usr/sbin/acpid
-OPTS="-c /etc/acpi/events"
 PID=/var/run/acpid.pid
 
 case $1 in
 start)
-	$SSD --start --pidfile $PID --exec $PROG -- $OPTS
+	$SSD --start --pidfile $PID --exec $PROG
 	;;
 stop)
 	$SSD --stop --remove-pidfile --retry 10 --pidfile $PID

@@ -5,16 +5,15 @@
 
 name=acpid
 version=2.0.27
-release=4
+release=5
 source=(http://downloads.sourceforge.net/sourceforge/acpid2/$name-$version.tar.xz \
-        acpid default default.sh)
+        acpid powerbtn)
 
 build() {
 	cd $name-$version
 	./configure --prefix=/usr
 	make
 	make DESTDIR=$PKG dist_doc_DATA= install
-	install -D -m 755 ../acpid      $PKG/etc/rc.d/acpid
-	install -D -m 644 ../default    $PKG/etc/acpi/events/default
-	install -D -m 755 ../default.sh $PKG/etc/acpi/default.sh
+	install -D -m 755 $SRC/acpid    $PKG/etc/rc.d/acpid
+	install -D -m 644 $SRC/powerbtn $PKG/etc/acpi/events/powerbtn
 }
