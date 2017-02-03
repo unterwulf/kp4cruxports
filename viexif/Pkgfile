@@ -1,0 +1,13 @@
+# Description: Mass edit Exif tags with your favorite text editor
+# URL:         https://github.com/unterwulf/viexif
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=viexif
+version=0.0.1
+release=1
+source=(https://github.com/unterwulf/$name/archive/$version.tar.gz)
+
+build() {
+    cd $name-$version
+    make PREFIX=/usr DESTDIR=$PKG install
+}
