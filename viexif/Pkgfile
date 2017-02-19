@@ -3,7 +3,7 @@
 # Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 
 name=viexif
-version=0.0.1
+version=0.0.2
 release=1
 source=(https://github.com/unterwulf/$name/archive/$version.tar.gz)
 
