@@ -3,7 +3,7 @@
 # Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 
 name=recutils
-version=1.5
+version=1.7
 release=1
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 

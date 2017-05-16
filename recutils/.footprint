@@ -14,9 +14,9 @@ drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/librec.a
 -rwxr-xr-x	root/root	usr/lib/librec.la
-lrwxrwxrwx	root/root	usr/lib/librec.so -> librec.so.0.0.0
-lrwxrwxrwx	root/root	usr/lib/librec.so.0 -> librec.so.0.0.0
--rwxr-xr-x	root/root	usr/lib/librec.so.0.0.0
+lrwxrwxrwx	root/root	usr/lib/librec.so -> librec.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/librec.so.1 -> librec.so.1.0.0
+-rwxr-xr-x	root/root	usr/lib/librec.so.1.0.0
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/csv2rec.1.gz
