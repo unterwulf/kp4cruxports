@@ -4,11 +4,11 @@
 # Depends on:  rcs
 
 name=src
-version=0.13
+version=1.13
 release=1
 source=(http://www.catb.org/~esr/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    make DESTDIR=$PKG prefix=/usr mandir=/man install
+    make DESTDIR=$PKG prefix=/usr install
 }
