@@ -1,0 +1,15 @@
+# Description: Unpack a fast-import stream into an RCS repository tree
+# URL:         http://www.catb.org/~esr/rcs-fast-import/
+# Packager:    Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  rcs
+
+name=rcs-fast-import
+version=1.0
+release=1
+source=(http://www.catb.org/~esr/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	install -D -m 755 rcs-fast-import $PKG/usr/bin/rcs-fast-import
+	install -D -m 755 rcs-fast-import.1 $PKG/usr/share/man/man1/rcs-fast-import.1
+}
