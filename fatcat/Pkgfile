@@ -1,0 +1,30 @@
+# Description: FAT filesystem explore, extract, repair, and forensic tool
+# URL:         https://github.com/Gregwar/fatcat
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  cmake
+
+name=fatcat
+version=1.0.6
+release=1
+source=(https://github.com/Gregwar/$name/archive/$version.tar.gz
+        fatcat-extract-timestamps.patch
+        fatcat-fat12-determination.patch
+        fatcat-volume_id.patch)
+
+build() {
+	cd $name-$version
+	while read patch; do
+		patch -p1 <$SRC/$patch
+	done <<-"EOLIST"
+		fatcat-extract-timestamps.patch
+		fatcat-fat12-determination.patch
+		fatcat-volume_id.patch
+		EOLIST
+
+	mkdir build
+	cd build
+	cmake ..
+	make
+	install -Dm 755 $name $PKG/usr/bin/$name
+	install -Dm 644 ../man/$name.1 $PKG/usr/share/man/man1/$name.1
+}

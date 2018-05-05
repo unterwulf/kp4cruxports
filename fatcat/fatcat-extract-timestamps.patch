@@ -1,0 +1,113 @@
+commit 306a44e47f78caa46462f3459a481ea0a4cd44fa
+Author: Vitaly Sinilin <vs@kp4.ru>
+Date:   Sat May 5 15:34:19 2018 +0300
+
+    Restore file timestamps when extracting
+    
+    It's convenient that an archiving utility restores file timestamps
+    when extracting files. See no reason for fatcat not doing so.
+
+diff --git a/src/analysis/FatExtract.cpp b/src/analysis/FatExtract.cpp
+index c31c526..db20861 100644
+--- a/src/analysis/FatExtract.cpp
++++ b/src/analysis/FatExtract.cpp
+@@ -1,7 +1,10 @@
++#include <errno.h>
+ #include <iostream>
+ #include <stdio.h>
++#include <string.h>
+ #include <string>
+ #include <sys/stat.h>
++#include <sys/time.h>
+ #include <sys/types.h>
+ #include "FatExtract.h"
+ 
+@@ -33,6 +36,28 @@ void FatExtract::onEntry(FatEntry &parent, FatEntry &entry, string name)
+         FILE *output = fopen(target.c_str(), "w+");
+         system.readFile(entry.cluster, entry.size, output, contiguous);
+         fclose(output);
++
++        time_t mtime = entry.changeDate.timestamp();
++        if (mtime == (time_t)-1) {
++            // Files on FAT can have dates up to 2107 year inclusive (which is
++            // more than 2038), so it's theoretically possible that on a dated
++            // system with 4-byte time_t some dates cannot be represented.
++            // Too bad.
++            cerr << "! Unable to set file timestamps for " << name
++                 << ": value cannot be represented" << endl;
++        } else {
++            struct timeval times[2];
++            // Modification time
++            times[1].tv_sec = mtime;
++            times[1].tv_usec = 0;
++            // Access time
++            times[0] = times[1];
++
++            if (utimes(target.c_str(), times) != 0) {
++                cerr << "! Unable to set file timestamps for " << name
++                     << ": " << strerror(errno) << endl;
++            }
++        }
+     }
+ }
+         
+diff --git a/src/core/FatDate.cpp b/src/core/FatDate.cpp
+index e226bdd..a919308 100644
+--- a/src/core/FatDate.cpp
++++ b/src/core/FatDate.cpp
+@@ -2,6 +2,7 @@
+ #include <sstream>
+ #include <iostream>
+ #include <string>
++#include <time.h>
+ 
+ #include <FatUtils.h>
+ #include "FatDate.h"
+@@ -33,3 +34,27 @@ string FatDate::pretty()
+ 
+     return string(buffer);
+ }
++
++/**
++ * Returns date as a number of seconds elapsed since the Epoch,
++ * 1970-01-01 00:00:00 +0000 (UTC). FAT dates are considered to be in the
++ * current timezone not in UTC. So what this function returns depends on
++ * the current timezone.
++ */
++time_t FatDate::timestamp() const
++{
++    struct tm tm;
++    tm.tm_sec = s;         // Seconds (0-60)
++    tm.tm_min = i;         // Minutes (0-59)
++    tm.tm_hour = h;        // Hours (0-23)
++    tm.tm_mday = d;        // Day of the month (1-31)
++    tm.tm_mon = m - 1;     // Month (0-11)
++    tm.tm_year = y - 1900; // Year - 1900
++
++    // A negative value of tm_isdst means that mktime() should (use timezone
++    // information and system databases to) attempt to determine whether DST
++    // is in effect at the specified time.
++    tm.tm_isdst = -1;      // Daylight saving time
++
++    return mktime(&tm);
++}
+diff --git a/src/core/FatDate.h b/src/core/FatDate.h
+index 829b15f..28cfc1d 100644
+--- a/src/core/FatDate.h
++++ b/src/core/FatDate.h
+@@ -2,6 +2,7 @@
+ #define _FATCAT_FATDATE_H
+ 
+ #include <string>
++#include <time.h>
+ 
+ using namespace std;
+ 
+@@ -15,6 +16,7 @@ class FatDate
+         int y, m, d;
+ 
+         string pretty();
++        time_t timestamp() const;
+ };
+ 
+ #endif // _FATCAT_FATDATE_H

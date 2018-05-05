@@ -1,0 +1,60 @@
+commit c9dadf8a779cc729f05cbb97991508a0bd57bb4a
+Author: Vitaly Sinilin <vs@kp4.ru>
+Date:   Sat May 5 21:24:32 2018 +0300
+
+    Make volume labels distinguishable from files
+    
+    So they could be easily filtered out by a parser if needed.
+    
+    (This is required to make a fatcat extfs helper for Midnight
+    Commander.)
+
+diff --git a/src/core/FatEntry.cpp b/src/core/FatEntry.cpp
+index e07a8fa..9aa5f1e 100644
+--- a/src/core/FatEntry.cpp
++++ b/src/core/FatEntry.cpp
+@@ -57,6 +57,11 @@ bool FatEntry::isDirectory()
+     return attributes&FAT_ATTRIBUTES_DIR;
+ }
+ 
++bool FatEntry::isVolumeId()
++{
++    return attributes&FAT_ATTRIBUTES_VOLUME_ID;
++}
++
+ bool FatEntry::isHidden()
+ {
+     return attributes&FAT_ATTRIBUTES_HIDE;
+diff --git a/src/core/FatEntry.h b/src/core/FatEntry.h
+index 66f3b8d..310f4e3 100644
+--- a/src/core/FatEntry.h
++++ b/src/core/FatEntry.h
+@@ -19,6 +19,7 @@ using namespace std;
+ // Attributes
+ #define FAT_ATTRIBUTES_HIDE     (1<<1)
+ #define FAT_ATTRIBUTES_DIR      (1<<4)
++#define FAT_ATTRIBUTES_VOLUME_ID 0x8
+ #define FAT_ATTRIBUTES_LONGFILE (0xf)
+ #define FAT_ATTRIBUTES_FILE     (0x20)
+ 
+@@ -32,6 +33,7 @@ class FatEntry
+ 
+         string getFilename();
+         bool isDirectory();
++        bool isVolumeId();
+         bool isHidden();
+         bool isErased();
+ 
+diff --git a/src/core/FatSystem.cpp b/src/core/FatSystem.cpp
+index 43f7912..74bc541 100644
+--- a/src/core/FatSystem.cpp
++++ b/src/core/FatSystem.cpp
+@@ -459,6 +459,8 @@ void FatSystem::list(vector<FatEntry> &entries)
+ 
+         if (entry.isDirectory()) {
+             printf("d");
++        } else if (entry.isVolumeId()) {
++            printf("v");
+         } else {
+             printf("f");
+         }

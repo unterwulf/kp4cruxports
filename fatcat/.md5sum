@@ -1,0 +1,4 @@
+9c49ba4621fb7af0d104fb71cca4972d  1.0.6.tar.gz
+0d1756c7a41aa3e12d1057f76aff16df  fatcat-extract-timestamps.patch
+02b3ee294869c6996bceda5a95964f51  fatcat-fat12-determination.patch
+82bb850f8517d6b7969cfd3a060b0953  fatcat-volume_id.patch

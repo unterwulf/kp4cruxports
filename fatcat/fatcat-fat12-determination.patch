@@ -1,0 +1,55 @@
+commit a11c3405611352a3abc6be4e64259033d0386c6d
+Author: Vitaly Sinilin <vs@kp4.ru>
+Date:   Sat May 5 22:30:09 2018 +0300
+
+    Fix FAT12 determination
+    
+    As per the FAT Type Determination section of "FAT32 File System
+    Specification".
+
+diff --git a/src/core/FatSystem.cpp b/src/core/FatSystem.cpp
+index 43f7912..e60cb9b 100644
+--- a/src/core/FatSystem.cpp
++++ b/src/core/FatSystem.cpp
+@@ -141,20 +141,22 @@ void FatSystem::parseHeader()
+ 
+     if (sectorsPerFat != 0) {
+         type = FAT16;
+-        bits = 16;
+         diskLabel = string(buffer+FAT16_DISK_LABEL, FAT16_DISK_LABEL_SIZE);
+         fsType = string(buffer+FAT16_DISK_FS, FAT16_DISK_FS_SIZE);
+         rootEntries = FAT_READ_SHORT(buffer, FAT16_ROOT_ENTRIES)&0xffff;
+         rootDirectory = 0;
+ 
+-        if (trim(fsType) == "FAT12") {
+-            bits = 12;
+-        }
+-
+         totalSectors = FAT_READ_SHORT(buffer, FAT16_TOTAL_SECTORS)&0xffff;
+         if (!totalSectors) {
+             totalSectors = FAT_READ_LONG(buffer, FAT_TOTAL_SECTORS)&0xffffffff;
+         }
++
++        unsigned int rootDirSectors =
++            (rootEntries*FAT_ENTRY_SIZE + bytesPerSector-1)/bytesPerSector;
++        unsigned long dataSectors = totalSectors -
++            (reservedSectors + fats*sectorsPerFat + rootDirSectors);
++        unsigned long totalClusters = dataSectors/sectorsPerCluster;
++        bits = (totalClusters > MAX_FAT12) ? 16 : 12;
+     } else {
+         type = FAT32;
+         bits = 32;
+diff --git a/src/core/FatSystem.h b/src/core/FatSystem.h
+index 55a8421..b462cec 100644
+--- a/src/core/FatSystem.h
++++ b/src/core/FatSystem.h
+@@ -13,6 +13,9 @@ using namespace std;
+ // Last cluster
+ #define FAT_LAST (-1)
+ 
++// Maximum number of clusters
++#define MAX_FAT12 0xFF4
++
+ // Header offsets
+ #define FAT_BYTES_PER_SECTOR        0x0b
+ #define FAT_SECTORS_PER_CLUSTER     0x0d
