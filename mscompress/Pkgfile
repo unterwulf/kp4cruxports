@@ -1,0 +1,15 @@
+# Description: Microsoft "compress.exe/expand.exe" compatible (de)compressor
+# URL:         http://code.stapelberg.de/git/mscompress/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=mscompress
+version=0.4
+release=1
+source=(https://github.com/stapelberg/$name/archive/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./autogen.sh
+	./configure --prefix=/usr
+	make DESTDIR=$PKG install
+}
