@@ -1,0 +1,15 @@
+# Description: Wake On LAN client
+# URL: https://sourceforge.net/projects/wake-on-lan/
+# Packager: Vitaly Sinilin, vs at kp4 dot ru
+
+name=wol
+version=0.7.1
+release=1
+source=(https://downloads.sourceforge.net/wake-on-lan/$name/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr --mandir=/usr/share/man --disable-nls
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/info
+}
