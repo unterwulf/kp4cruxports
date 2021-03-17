@@ -1,0 +1,18 @@
+# Description: An enhanced version of the BSD tftp client/server
+# URL: http://freshmeat.net/projects/tftp-hpa/
+# Maintainer: Vitaly Sinilin, vs at kp4 dot ru
+# Packager: Matt Housh, jaeger at morpheus dot net
+
+name=tftp-hpa
+version=5.2
+release=1
+source=(http://www.kernel.org/pub/software/network/tftp/tftp-hpa/$name-$version.tar.xz \
+        tftpd-hpa.rc)
+
+build () {
+	cd $name-$version
+	./configure --prefix=/usr CFLAGS=-fcommon
+	make
+	make INSTALLROOT=$PKG install
+	install -Dm 755 $SRC/tftpd-hpa.rc $PKG/etc/rc.d/tftpd-hpa
+}

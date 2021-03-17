@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# /etc/rc.d/tftpd-hpa: start/stop TFTP daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/in.tftpd
+PID=/var/run/in.tftpd.pid
+DIR=/var/lib/tftpboot
+OPTS=--secure
+
+case $1 in
+start)
+	$SSD --start --pidfile $PID --exec $PROG \
+		-- --pidfile $PID --listen $OPTS $DIR
+	;;
+stop)
+	$SSD --stop --retry 10 --pidfile $PID
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+reload)
+	$SSD --stop --signal HUP --pidfile $PID
+	;;
+status)
+	$SSD --status --pidfile $PID
+	case $? in
+	0) echo "$PROG is running with pid $(cat $PID)";;
+	1) echo "$PROG is not running but the pid file $PID exists";;
+	3) echo "$PROG is not running";;
+	4) echo "Unable to determine the program status";;
+	esac
+	;;
+*)
+	echo "usage: $0 [start|stop|restart|reload|status]"
+	;;
+esac
+
+# End of file
