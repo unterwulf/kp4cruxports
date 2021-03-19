@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# /etc/rc.d/ethersrv: start/stop EtherDFS server
+#
+
+SSD=/sbin/start-stop-daemon
+PROG=/usr/sbin/ethersrv
+DIR=/var/lib/etherdfs
+IFACE=eth0
+
+case $1 in
+start)
+	$SSD --start --exec $PROG -- $IFACE $DIR >/dev/null
+	;;
+stop)
+	$SSD --stop --retry 10 --exec $PROG
+	ip link set $IFACE promisc off
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+status)
+	$SSD --status --exec $PROG
+	case $? in
+	0) echo "$PROG is running";;
+	3) echo "$PROG is not running";;
+	4) echo "Unable to determine the program status";;
+	esac
+	;;
+*)
+	echo "usage: $0 [start|stop|restart|status]"
+	;;
+esac
+
+# End of file

@@ -1,0 +1,22 @@
+# Description: EtherDFS server
+# URL:         http://etherdfs.sourceforge.net/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=ethersrv
+version=20170415
+release=1
+source=(https://downloads.sourceforge.net/etherdfs/$name-linux/$name-linux-$version.tar.xz
+        ethersrv-linux-20170415-netlink.patch
+        ethersrv.rc)
+
+build() {
+	cd $name-linux-$version
+
+	for patch in $SRC/*.patch; do
+		patch -p1 <$patch
+	done
+
+	make
+	install -Dm 755 $SRC/ethersrv.rc $PKG/etc/rc.d/ethersrv
+	install -Dm 755 ethersrv-linux $PKG/usr/sbin/ethersrv
+}

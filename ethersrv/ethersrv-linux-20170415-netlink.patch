@@ -1,0 +1,115 @@
+diff -pruN ethersrv-linux-20170415.orig/ethersrv-linux.c ethersrv-linux-20170415/ethersrv-linux.c
+--- ethersrv-linux-20170415.orig/ethersrv-linux.c	2017-04-15 16:37:28.000000000 +0300
++++ ethersrv-linux-20170415/ethersrv-linux.c	2019-06-27 19:00:53.035802590 +0300
+@@ -33,6 +33,9 @@
+ #include <endian.h>          /* le16toh(), le32toh() */
+ #include <linux/if_ether.h>
+ #include <linux/if_packet.h>
++#include <linux/if_link.h>
++#include <linux/netlink.h>
++#include <linux/rtnetlink.h>
+ #include <limits.h>          /* PATH_MAX and such */
+ #include <net/ethernet.h>
+ #include <net/if.h>
+@@ -658,6 +661,85 @@ static int process(struct struct_answcac
+   return(reslen + 60);
+ }
+ 
++static int switch_iface_to_promisc(int ifindex)
++{
++  int status = 1;
++
++  struct sockaddr_nl sa;
++  struct nlmsghdr nh;
++  struct ifinfomsg iim;
++  struct iovec iov[2];
++  struct msghdr req;
++  int fd = socket(AF_NETLINK, SOCK_DGRAM, NETLINK_ROUTE);
++  if (fd < 0) {
++    fprintf(stderr, "Unable to create netlink socket");
++    return 1;
++  }
++
++  memset(&sa, '\0', sizeof sa);
++  sa.nl_family = AF_NETLINK;
++
++  memset(&nh, '\0', sizeof nh);
++  nh.nlmsg_len = NLMSG_LENGTH(sizeof(struct ifinfomsg));
++  nh.nlmsg_flags = NLM_F_REQUEST | NLM_F_ACK;
++  nh.nlmsg_type = RTM_SETLINK;
++  nh.nlmsg_pid = getpid();
++
++  memset(&iim, '\0', sizeof iim);
++  iim.ifi_family = AF_UNSPEC;
++  iim.ifi_index = ifindex;
++  iim.ifi_flags = iim.ifi_change = IFF_PROMISC;
++
++  iov[0].iov_base = &nh;
++  iov[0].iov_len = sizeof nh;
++  iov[1].iov_base = &iim;
++  iov[1].iov_len = sizeof iim;
++
++  memset(&req, '\0', sizeof req);
++  req.msg_name = &sa;
++  req.msg_namelen = sizeof sa;
++  req.msg_iov = iov;
++  req.msg_iovlen = sizeof(iov)/sizeof(iov[0]);
++
++  if (sendmsg(fd, &req, 0) > 0) {
++    char buf[4096];
++    struct iovec iov;
++    struct msghdr rsp;
++    struct nlmsghdr *nh;
++    ssize_t len;
++
++    iov.iov_base = buf;
++    iov.iov_len = sizeof buf;
++    memset(&rsp, '\0', sizeof rsp);
++    rsp.msg_iov = &iov;
++    rsp.msg_iovlen = 1;
++
++    while ((len = recvmsg(fd, &rsp, 0)) == -1) {
++      if (errno != EINTR) {
++        fprintf(stderr, "Unable to receive netlink response\n");
++        goto exit;
++      }
++    }
++
++    for (nh = (struct nlmsghdr *)buf; NLMSG_OK(nh, len);
++        nh = NLMSG_NEXT(nh, len)) {
++      if (nh->nlmsg_type == NLMSG_ERROR) {
++        struct nlmsgerr *err = (struct nlmsgerr *)(nh+1);
++        if (err->error == 0)
++          status = 0;
++        else
++          fprintf(stderr, "Netlink error: %d\n", err->error);
++        break;
++      }
++    }
++  } else {
++    fprintf(stderr, "Unable to send netlink request\n");
++  }
++
++exit:
++  close(fd);
++  return status;
++}
+ 
+ static int raw_sock(const int protocol, const char *const interface, void *const hwaddr) {
+   struct ifreq iface;
+@@ -680,13 +762,8 @@ static int raw_sock(const int protocol,
+     if (result == -1) break;
+     ifindex = iface.ifr_ifindex;
+ 
+-    memset(&iface, 0, sizeof(iface));
+-    strncpy((char *)&iface.ifr_name, interface, IFNAMSIZ);
+-    result = ioctl(socketfd, SIOCGIFFLAGS, &iface);
+-    if (result == -1) break;
+-    iface.ifr_flags |= IFF_PROMISC;
+-    result = ioctl(socketfd, SIOCSIFFLAGS, &iface);
+-    if (result == -1) break;
++    if (switch_iface_to_promisc(ifindex) != 0)
++      break;
+ 
+     memset(&iface, 0, sizeof iface);
+     strncpy((char *)&iface.ifr_name, interface, IFNAMSIZ);
