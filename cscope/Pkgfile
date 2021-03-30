@@ -1,0 +1,17 @@
+# Description: Interactive source code browsing tool
+# URL:         http://cscope.sourceforge.net
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Packager:    Tadeusz Sosnierz, tadzikes gmail com
+# Depends on:  ncurses
+
+name=cscope
+version=15.9
+release=1
+source=(http://downloads.sourceforge.net/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}
