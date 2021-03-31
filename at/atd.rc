@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# /etc/rc.d/atd: start/stop at daemon
+#
+
+SSD=/sbin/start-stop-daemon
+PIDFILE="/var/run/atd.pid"
+PROG="/usr/sbin/atd"
+ARGS=""
+
+case $1 in
+start)
+	$SSD --start --pidfile $PIDFILE --exec $PROG -- $ARGS
+	;;
+stop)
+	$SSD --stop --retry 10 --pidfile $PIDFILE
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+status)
+	$SSD --status --pidfile $PIDFILE
+	case $? in
+	0) echo "$PROG is running with pid: $(cat $PIDFILE)";;
+	1) echo "$PROG is not running but the pid file $PIDFILE exists";;
+	3) echo "$PROG is not running";;
+	4) echo "Unable to determine the program status";;
+	esac
+	;;
+*)
+	echo "usage: $0 [start|stop|restart|status]"
+	;;
+esac
+
+# End of file

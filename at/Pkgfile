@@ -1,0 +1,23 @@
+# Description:	Schedule commands for later execution
+# URL:		http://blog.calhariz.com
+# Maintainer:	Vitaly Sinilin, vs at kp4 dot ru
+# Packager:	Alan Mizrahi, alan at mizrahi dot com dot ve
+
+name=at
+version=3.1.23
+release=1
+source=(http://software.calhariz.com/$name/${name}_$version.orig.tar.gz
+        atd.rc atd.pam)
+
+build() {
+	cd $name-$version
+
+	SENDMAIL=/usr/sbin/sendmail ./configure --prefix=/usr
+	make IROOT=$PKG install
+	rm -rf $PKG/usr/doc
+	install -Dm 755 $SRC/atd.rc $PKG/etc/rc.d/atd
+
+	if [ -f /usr/include/security/pam_appl.h ]; then
+		install -Dm 600 $SRC/atd.pam $PKG/etc/pam.d/atd
+	fi
+}
