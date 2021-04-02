@@ -1,0 +1,5 @@
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/lib/
+drwxr-xr-x	root/root	usr/lib/mc/
+drwxr-xr-x	root/root	usr/lib/mc/extfs.d/
+-rwxr-xr-x	root/root	usr/lib/mc/extfs.d/fat

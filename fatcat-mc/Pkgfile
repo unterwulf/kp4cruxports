@@ -1,0 +1,13 @@
+# Description: FAT external virtual file system for GNU Midnight Commander
+# URL:         http://crux.kp4.ru/fatcat-mc
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  mc fatcat
+
+name=fatcat-mc
+version=20180503
+release=1
+source=(fat)
+
+build() {
+	install -Dm 755 fat $PKG/usr/lib/mc/extfs.d/fat
+}

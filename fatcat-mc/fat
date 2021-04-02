@@ -1,0 +1,74 @@
+#!/bin/sh
+#
+# (c) 2018 Vitaly Sinilin <vs@kp4.ru>
+#
+
+mcfat_list()
+{
+	awk -v uid=`id -u` -v gid=`id -g` -- '
+	BEGIN {
+		dump_dir(ARGV[1])
+		exit 0
+	}
+
+	function dump_dir(image, dir,    cmd)
+	{
+		# fatcat exit status seems to be always 0, so we have to
+		# use stderr as an indicator of failure.
+		cmd = "fatcat \"" escape(image) "\" -l \"" escape(dir) "\" 2>&1"
+		while (ret = (cmd | getline)) {
+			if ($1 == "Error:") {
+				print substr($0, 10) >"/dev/stderr"
+				exit 1
+			}
+
+			if (/^[fd] / && $4 != "./" && $4 != "../") {
+				mode = ($1 == "d") ? "drwxr-xr-x" : "-rw-r--r--"
+				# mc expects date in the DD-MM-YYYY format
+				split($2, a, /\//)
+				date = sprintf("%02u-%02u-%u", a[2], a[1], a[3])
+				time = $3
+				name = dir $4
+				size = ($1 != "d") ? substr($6, 3) : 0
+
+				print mode, 1, uid, gid, size, date, time, name
+
+				# descend into sub-directory
+				if ($1 == "d")
+					dump_dir(image, name)
+			}
+		}
+		close(cmd)
+
+		if (ret != 0) {
+			print ERRNO >"/dev/stderr"
+			exit 1
+		}
+	}
+
+	function escape(str)
+	{
+		gsub(/\\/, "\\\\", str)
+		gsub(/"/, "\\\"", str)
+		return str
+	}' "$1"
+}
+
+mcfat_copyout()
+{
+	fatcat "$1" -r "$2" >"$3"
+}
+
+umask 077
+
+cmd=$1
+shift
+
+case $cmd in
+	list|copyout)
+		mcfat_$cmd "$@";;
+	rm|mkdir|rmdir|copyin)
+		echo "Operation is not supported" >&2
+		exit 1;;
+	*) exit 1;;
+esac
