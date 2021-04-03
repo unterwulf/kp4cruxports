@@ -1,0 +1,13 @@
+# Description: Raw CD images converter
+# URL:         https://github.com/unterwulf/bin2iso
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=bin2iso
+version=0.5
+release=1
+source=(https://github.com/unterwulf/$name/archive/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	make DESTDIR=$PKG PREFIX=/usr/bin install
+}
