@@ -4,7 +4,7 @@
 # Depends on:  boehm-gc
 
 name=poke
-version=1.1
+version=1.2
 release=1
 source=(https://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 
