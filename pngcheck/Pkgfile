@@ -1,0 +1,15 @@
+# Description: PNG/JNG/MNG files verifier
+# URL:         http://www.libpng.org/pub/png/apps/pngcheck.html
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=pngcheck
+version=3.0.3
+release=1
+source=(http://www.libpng.org/pub/png/src/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	make -f Makefile.unx pngcheck
+	install -Dm 755 pngcheck $PKG/usr/bin/pngcheck
+	install -Dm 644 pngcheck.1 $PKG/usr/share/man/man1/pngcheck.1
+}
