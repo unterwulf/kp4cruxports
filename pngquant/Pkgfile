@@ -1,0 +1,16 @@
+# Description: A command-line utility for lossy compression of PNG images
+# URL:         https://pngquant.org
+# Maintainer:  Vitaly Sinlin, vs at kp4 dot ru
+# Depends on:  libpng
+
+name=pngquant
+version=2.17.0
+release=1
+source=(https://github.com/kornelski/pngquant/archive/$version/$name-$version.tar.gz
+        https://github.com/ImageOptim/libimagequant/archive/$version/libimagequant-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr --with-libimagequant=../libimagequant-$version
+	make DESTDIR=$PKG install
+}
