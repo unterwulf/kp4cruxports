@@ -1,0 +1,15 @@
+# Description: PNG files optimizer
+# URL:         https://pmt.sourceforge.io/pngcrush/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  libpng
+
+name=pngcrush
+version=1.8.13
+release=1
+source=(http://downloads.sourceforge.net/project/pmt/$name/$version/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+	make -f Makefile-nolib
+	install -Dm 755 pngcrush $PKG/usr/bin/pngcrush
+}
