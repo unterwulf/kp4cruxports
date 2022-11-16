@@ -4,9 +4,9 @@
 # Depends on:  ed
 
 name=rcs
-version=5.9.3
+version=5.10.1
 release=1
-source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.lz)
 
 build() {
     cd $name-$version
