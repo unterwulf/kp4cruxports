@@ -1,0 +1,15 @@
+# Description: An alternate posix capabilities library
+# URL:         https://github.com/stevegrubb/libcap-ng
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=libcap-ng
+version=0.8.3
+release=1
+source=(https://github.com/stevegrubb/$name/archive/refs/tags/v$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./autogen.sh
+	./configure --prefix=/usr
+	make DESTDIR=$PKG install
+}
