@@ -1,0 +1,14 @@
+# Description: A minimalistic log watch daemon
+# URL:         https://github.com/unterwulf/lw
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=lw
+version=0.0.1
+release=1
+source=(https://github.com/unterwulf/$name/archive/0.0.1/$name-$version.tar.gz $name.rc)
+
+build() {
+	cd $name-$version
+	make PREFIX=/usr DESTDIR=$PKG install
+	install -Dm 755 $SRC/$name.rc $PKG/etc/rc.d/$name
+}

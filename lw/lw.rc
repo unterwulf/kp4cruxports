@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# /etc/rc.d/lw: start/stop lw daemon
+#
+
+pidfile=/var/run/lw.pid
+
+case $1 in
+start)
+	/usr/bin/lw -p $pidfile /etc/lw.conf
+	;;
+stop)
+	if read pid <$pidfile; then
+		kill $pid
+	else
+		echo "lw is not running" >&2
+		exit 1
+	fi
+	;;
+reload)
+	if read pid <$pidfile; then
+		kill -HUP $pid
+	else
+		echo "lw is not running" >&2
+		exit 1
+	fi
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+*)
+	echo "usage: $0 [start|stop|reload|restart]"
+	;;
+esac
+
+# End of file
