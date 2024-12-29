@@ -1,0 +1,16 @@
+# Description: picocom is a minimal dumb-terminal emulation program
+# URL:         https://github.com/npat-efault/picocom
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Packager:    Jose V Beneyto, sepen at crux dot nu
+
+name=picocom
+version=3.1
+release=1
+source=(https://github.com/npat-efault/$name/archive/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	make $name
+	install -D -m 0755 $name $PKG/usr/bin/$name
+	install -D -m 0644 $name.1 $PKG/usr/share/man/man1/$name.1
+}
