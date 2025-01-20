@@ -1,0 +1,61 @@
+# Description: SMB server and client for unix (version 3)
+# URL:         http://www.samba.org
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+# Depends on:  ncurses openssl readline zlib libcap acl
+
+name=samba3
+version=3.6.25
+release=1
+source=(http://www.samba.org/samba/ftp/stable/samba-$version.tar.gz \
+        samba-config.patch samba3)
+
+build() {
+	cd samba-$version/source3
+
+	patch -d .. -p1 -i $SRC/samba-config.patch
+
+	./configure --prefix=/usr \
+		--localstatedir=/var \
+		--with-fhs \
+		--with-configdir=/etc/samba3 \
+		--with-modulesdir=/usr/lib/samba3 \
+		--with-lockdir=/var/run/samba3 \
+		--with-piddir=/var/run/samba3 \
+		--with-nmbdsocketdir=/var/run/samba3 \
+		--with-logfilebase=/var/log/samba3 \
+		--with-statedir=/var/lib/samba3 \
+		--with-cachedir=/var/lib/samba3 \
+		--disable-swat \
+		--without-pam \
+		--without-winbind \
+		--without-libnetapi \
+		--without-libsmbclient \
+		--without-libsmbsharemodes \
+		--with-included-popt \
+		--disable-external-{libtdb,libtalloc,libtevent} \
+		--without-{libtdb,libtalloc,libtevent} \
+		--disable-shared-libs
+
+	make
+	make DESTDIR=$PKG install
+
+	# spool/log/lib directory
+	install -d $PKG/var/{lib,log}/samba3
+	install -d -m 1777 $PKG/var/spool/samba3
+
+	# config-file and start-script
+	install -m 600 ../examples/smb.conf.default $PKG/etc/samba3
+	install -D -m 755 $SRC/samba3 $PKG/etc/rc.d/samba3
+
+	# cleanup
+	rm -r $PKG/usr/share/locale
+	rm $PKG/usr/share/man/man8/{swat.8,tdb*.8}
+
+	for prog in $PKG/usr/bin/* $PKG/usr/sbin/*; do
+		mv $prog ${prog%/*}/samba3-${prog##*/}
+	done
+
+	for man in $PKG/usr/share/man/man*/*; do
+		mv $man ${man%/*}/samba3-${man##*/}
+	done
+}
