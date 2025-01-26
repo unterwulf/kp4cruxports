@@ -17,14 +17,15 @@ drwxr-xr-x	root/root	usr/lib/
 lrwxrwxrwx	root/root	usr/lib/librec.so -> librec.so.1.0.0
 lrwxrwxrwx	root/root	usr/lib/librec.so.1 -> librec.so.1.0.0
 -rwxr-xr-x	root/root	usr/lib/librec.so.1.0.0
-drwxr-xr-x	root/root	usr/man/
-drwxr-xr-x	root/root	usr/man/man1/
--rw-r--r--	root/root	usr/man/man1/csv2rec.1.gz
--rw-r--r--	root/root	usr/man/man1/rec2csv.1.gz
--rw-r--r--	root/root	usr/man/man1/recdel.1.gz
--rw-r--r--	root/root	usr/man/man1/recfix.1.gz
--rw-r--r--	root/root	usr/man/man1/recfmt.1.gz
--rw-r--r--	root/root	usr/man/man1/recinf.1.gz
--rw-r--r--	root/root	usr/man/man1/recins.1.gz
--rw-r--r--	root/root	usr/man/man1/recsel.1.gz
--rw-r--r--	root/root	usr/man/man1/recset.1.gz
+drwxr-xr-x	root/root	usr/share/
+drwxr-xr-x	root/root	usr/share/man/
+drwxr-xr-x	root/root	usr/share/man/man1/
+-rw-r--r--	root/root	usr/share/man/man1/csv2rec.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/rec2csv.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/recdel.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/recfix.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/recfmt.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/recinf.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/recins.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/recsel.1.gz
+-rw-r--r--	root/root	usr/share/man/man1/recset.1.gz

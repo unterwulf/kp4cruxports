@@ -3,14 +3,14 @@
 # Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 
 name=recutils
-version=1.7
+version=1.9
 release=1
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 
 build() {
     cd $name-$version
-    ./configure --prefix=/usr --mandir=/usr/man --disable-nls
+    ./configure --prefix=/usr --disable-nls
     make
     make DESTDIR=$PKG install
-    rm -rf $PKG/usr/share
+    rm -rf $PKG/usr/share/{info,recutils}
 }
