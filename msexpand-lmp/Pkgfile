@@ -1,0 +1,15 @@
+# Description: libmspack-based microsoft expand.exe compatible decompressor
+# URL: https://www.cabextract.org.uk/libmspack/
+# Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
+
+name=msexpand-lmp
+version=0.11alpha
+release=1
+source=(http://www.cabextract.org.uk/libmspack/libmspack-$version.tar.gz)
+
+build() {
+	cd libmspack-$version
+	./configure --prefix=/usr --disable-shared
+	make examples/msexpand
+	install -D -m 755 examples/msexpand $PKG/usr/bin/$name
+}
