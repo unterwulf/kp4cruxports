@@ -3,9 +3,9 @@
 # Maintainer:  Vitaly Sinilin, vs at kp4 dot ru
 
 name=lw
-version=0.0.1
+version=0.0.2
 release=1
-source=(https://github.com/unterwulf/$name/archive/0.0.1/$name-$version.tar.gz $name.rc)
+source=(https://github.com/unterwulf/$name/archive/$version/$name-$version.tar.gz $name.rc)
 
 build() {
 	cd $name-$version
